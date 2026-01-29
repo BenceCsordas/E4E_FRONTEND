@@ -9,6 +9,8 @@ function App() {
   return (
     <>
       <h1>Events for Everyone</h1>
+      <p>monsti</p>
+      <p>igen</p>
     </>
   )
 }
