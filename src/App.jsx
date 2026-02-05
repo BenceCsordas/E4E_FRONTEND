@@ -1,15 +1,22 @@
-import { useState } from 'react'
 import './App.css'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import Home from './components/Home'
+import Events from './components/Events'
+import Profile from './components/Profile'
+import CreateEvent from './components/CreateEvent'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+const navigate = useNavigate()
   return (
-    <>
-      <h1>Events for Everyone</h1>
-      <p>monsti</p>
-      <p>igen</p>
-    </>
+    <div className='Main'>
+      {/* <button onClick={()=> navigate("/")}>Vissza</button> */}
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/events" element={<Events/>}/>
+      <Route path="/profile" element={<Profile/>}/>
+      <Route path="/create_event" element={<CreateEvent/>}/>
+    </Routes>
+    </div>
   )
 }
 
