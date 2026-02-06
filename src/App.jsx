@@ -6,12 +6,13 @@ import Profile from './components/Profile'
 import CreateEvent from './components/CreateEvent'
 import { SignIn } from './components/SignIn'
 import { SignUp } from './components/SignUp'
+import { AiFillHome } from "react-icons/ai";
 
 function App() {
 const navigate = useNavigate()
   return (
     <div className='Main'>
-      {/* <button onClick={()=> navigate("/")}>Vissza</button> */}
+      <AiFillHome onClick={()=> navigate("/")} className='home-icon' size={40}/>
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/events" element={<Events/>}/>
