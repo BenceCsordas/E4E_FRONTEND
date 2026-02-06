@@ -22,13 +22,13 @@ export const SignUp = () => {
     
   }
   return (
-    <div className='signin-up-tarolo'>
+    <div className='signin-up-tarolo signup-tarolo'>
+      <h1>Regisztrálj!</h1>
       <form action="submit" onSubmit={handleSubmit}>
       <div className='signin'>
-        <h1>Regisztrálj!</h1>
         <input name='email' type='email' placeholder='email' style={{color:"black"}}/>
         <input name="password" type="password" placeholder='jelszó' style={{color:"black"}}/>
-        <input name="displayName" type="text" placeholder='Felhasználónév' style={{color:"black"}}/>
+        <input name="displayName" type="text" placeholder='felhasználónév' style={{color:"black"}}/>
         <button className='gomb' disabled={loading}><b>{loading? "Regisztráció folyamatban" :"Regisztráció"}</b></button>
       </div>
       </form>

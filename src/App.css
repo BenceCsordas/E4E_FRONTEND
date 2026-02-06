@@ -11,10 +11,18 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
 h1 {
     text-align: center;
 }
+.home-icon {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
+
 .HomeContainer {
     display: flex;
     align-items: center;
@@ -215,3 +223,84 @@ h1 {
     border-left: 1px solid rgba(121, 121, 121, 0.212);
 }
 
+/*Sign in, Sign up*/
+.signin-up-tarolo {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.signin-up-tarolo form {
+  background-color: rgba(187, 187, 187, 0.212);
+  width: 300px;
+  height: 180px;
+  border-radius: 5px;
+  padding: 10px;
+  border-right: 1px solid rgba(202, 202, 202, 0.212);
+    border-top: 1px solid rgba(202, 202, 202, 0.212);
+    border-bottom: 1px solid rgba(121, 121, 121, 0.212);
+    border-left: 1px solid rgba(121, 121, 121, 0.212);
+}
+.signup-tarolo  form{
+  height: 200px !important;
+}
+.signin-up-tarolo .signin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  position: relative;
+}
+.gomb {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 5px;
+  background-color: rgba(187, 187, 187, 0.212);
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+.gomb:hover {
+  transition: 0.1s ease-in-out;  
+  background-color: rgba(187, 187, 187, 0.418);
+}
+
+.signin input {
+  padding: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  color: black;
+
+}
+.message {
+  color: rgb(255, 102, 0);
+  text-align: center;
+}
+
+/* Esemény létrehozás design*/
+.createEvent {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.createEvent form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(187, 187, 187, 0.212);
+  padding: 10px;
+  border-radius: 5px;
+  height: 400px;
+
+}
+.createEvent input, textarea {
+  color: black;
+}
+.createEvent textarea {
+  min-width: 300px;
+  min-height: 300px;
+  resize: none;
+}

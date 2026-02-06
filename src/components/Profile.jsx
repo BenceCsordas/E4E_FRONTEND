@@ -11,6 +11,7 @@ const Profile = () => {
     navigate("/")
 
   }
+  console.log(user)
   return (
     <div>
       {user?.displayName}

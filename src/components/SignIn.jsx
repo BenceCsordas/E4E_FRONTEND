@@ -22,17 +22,18 @@ export const SignIn = () => {
    }
   return (
     <div className='signin-up-tarolo'>
+      <h1>Jelentkezz be!</h1>
       <form action="submit" onSubmit={handleSubmit}>
       <div className='signin'>
-        <h1>Jelentkezz be!</h1>
-        <input name="email" type='email' placeholder='email' style={{color:"black"}}/>
-        <input name="password" type="password" placeholder='jelszó' style={{color:"black"}}/>
+        <input name="email" type='email' placeholder='email' />
+        <input name="password" type="password" placeholder='jelszó' />
+        {msg && msg?.err && <p className='message'>{msg.err}</p>}
         <button className='gomb'><b>Bejelentkezés</b></button>
       </div>
       </form>
       <div><a href='' onClick={()=>navigate("/pwreset")}>Elfelejtett jelszó</a></div>
-      <div><a href='' onClick={()=>navigate("/signup")}>Nincs felhasználóm!</a></div>
-      {msg && msg?.err && <p style={{color:"red"}}>{msg.err}</p>}
+      <div><a href='' onClick={()=>navigate("/signup")}>Nincs fiókom</a></div>
+      
       
     </div>
   )
