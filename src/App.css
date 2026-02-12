@@ -305,6 +305,53 @@ h1 {
   resize: none;
 }
 
+/* Event create slider */
+.slider-container {
+  width: 350px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.createEvent .buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.createEvent button {
+  padding: 8px 15px;
+  border: none;
+  background: #007BFF;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.createEvent button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 @media only screen and (max-width: 1300px){
   .GridContainer{
     grid-template-columns: repeat(4, 230px);
