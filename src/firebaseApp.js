@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./firebaseConfig";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { firebaseConfig } from "./firebaseConfig";
 
 //saját Firebase App példány, ezzel érjük el az összes szolgáltatást
 const app = initializeApp(firebaseConfig);
