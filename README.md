@@ -12,6 +12,8 @@ _Miután elkészültünk a homepage designjával hozzá láttunk a backend fájl
 
 ### 2026.02.12
 Összekapcsoltuk a backend a frontendel,megcsináltuk a felhasználókezelést illetve az oldal reszponzívvá tételét és az esemény felvétel kezdődleges fázisát.
+
+
 ![Reszponzív](public/Responsive.png)
 
 
