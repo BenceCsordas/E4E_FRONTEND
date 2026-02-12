@@ -1,19 +1,63 @@
-import React from 'react'
+import { useState } from "react";
+import { addEvent } from "../utils";
 
 const Events = () => {
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [file, setFile] = useState(null);
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const result = await addEvent(
+      { title, location, description }, // ✅ description is megy
+      file
+    );
+
+    if (result?.ok) {
+      alert("Sikeres létrehozás!");
+      setTitle("");
+      setLocation("");
+      setDescription("");
+      setFile(null);
+    } else {
+      alert("Hiba történt!");
+    }
+  };
+
   return (
-    <div className='cardHolder'>
-      <div class="card">
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Esemény címe"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
 
-            <h1>Esemény...</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium consequuntur voluptatem exercitationem laborum cupiditate a consequatur nobis quas blanditiis magni tenetur maxime ullam totam reprehenderit architecto accusantium, rem possimus inventore?
-            Eum ipsum quod error eaque assumenda quibusdam eveniet voluptas a officia beatae. Laudantium eius temporibus ratione eos dicta voluptas atque tenetur asperiores cum, unde pariatur eum reiciendis. Aspernatur, tenetur consequatur!
-            Perferendis delectus repellat unde doloremque! Error debitis expedita labore accusamus sint assumenda dolore fugiat aliquam tenetur culpa non maiores sed fuga voluptate eaque cupiditate ad modi, ut suscipit, voluptatibus nisi.
-            Asperiores voluptatum ipsa voluptatem aperiam inventore velit voluptas quo minus numquam et! Quae sed accusantium illo doloremque vero? A, suscipit. Quia dicta consequuntur at nulla. Sunt magni dolorem placeat molestiae.
-            Earum dicta vitae voluptate id aut sit eveniet hic officia fugiat maxime molestiae exercitationem, tenetur accusamus illo maiores impedit cumque corrupti sed eum commodi similique? Esse dolorum cumque illum dolor?</p>
-      </div>
-    </div>
-  )
-}
+      <input
+        type="text"
+        placeholder="Helyszín"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      />
 
-export default Events
+      <textarea
+        placeholder="Leírás"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setFile(e.target.files[0])}
+      />
+
+      <button type="submit">Hozzáadás</button>
+    </form>
+  );
+};
+
+export default Events;

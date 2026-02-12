@@ -7,6 +7,7 @@ import CreateEvent from './components/CreateEvent'
 import { SignIn } from './components/SignIn'
 import { SignUp } from './components/SignUp'
 import { AiFillHome } from "react-icons/ai";
+import PwReset from './components/PwReset'
 
 function App() {
 const navigate = useNavigate()
@@ -20,6 +21,7 @@ const navigate = useNavigate()
       <Route path="/create_event" element={<CreateEvent/>}/>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
+      <Route path="/pwreset" element={<PwReset/>}/>
     </Routes>
     </div>
   )
