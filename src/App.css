@@ -304,3 +304,61 @@ h1 {
   min-height: 300px;
   resize: none;
 }
+
+@media only screen and (max-width: 1300px){
+  .GridContainer{
+    grid-template-columns: repeat(4, 230px);
+    grid-template-rows: repeat(2, 230px);
+  }
+}
+@media only screen and (max-width: 970px){
+  .div1{
+      grid-area: doboz1;
+  }
+  .div2{
+    grid-area: doboz2;
+
+  }
+  .div4{
+    grid-area: doboz4;
+    
+  }
+  .div3 {
+    grid-area: doboz3;
+  }
+  .GridContainer{
+    grid-template-columns: repeat(2, 200px);
+    grid-template-rows: repeat(4, 200px);
+    grid-template-areas: 
+        "doboz4 doboz4"
+        "doboz4 doboz4"
+        "doboz3 doboz3"
+        "doboz1 doboz2"
+    ;
+  }
+}
+@media only screen and (max-width: 450px){
+  .div1{
+      grid-area: doboz1;
+  }
+  .div2{
+    grid-area: doboz2;
+
+  }
+  .div4{
+    grid-area: doboz4;
+  }
+  .div3 {
+    grid-area: doboz3;
+  }
+  .GridContainer{
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(4, 150px);
+    grid-template-areas: 
+        "doboz4 doboz4"
+        "doboz4 doboz4"
+        "doboz3 doboz3"
+        "doboz1 doboz2"
+    ;
+  }
+}
