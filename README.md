@@ -1,6 +1,6 @@
 # Events4everyone
 
-[!Note]
+>[!Note]
 >A csoportunk egy olyan közösségi weboldalt tervez ahol az emberek eseményeket tudnak létrehozni vagy jelentkezni tudnak rájuk.
 ### 2026.02.06
 Első lépésként megterveztük a home paget és a stílusos grid használatot.
