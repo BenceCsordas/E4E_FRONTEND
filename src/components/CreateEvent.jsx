@@ -1,60 +1,121 @@
 import React, { useState } from 'react'
-
+import { addEvent } from "../utils";
 const CreateEvent = () => {
+
   const [currentIndex, setCurrentIndex] = useState(0)
-  const slider = document.getElementById('slider');
+  const totalSlides = 4
+
   const next = () => {
-      if (currentIndex < 3) {
-          setCurrentIndex(prev=>prev+=1)
-        }
-      console.log(currentIndex)
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    if (currentIndex < totalSlides - 1) {
+      setCurrentIndex(prev => prev + 1)
+    }
   }
+
   const previous = () => {
-       if (currentIndex > 0) {
-          setCurrentIndex(prev=>prev-=1)
-        }
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-      console.log(currentIndex)
+    if (currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1)
+    }
   }
+
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [file, setFile] = useState(null);
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const result = await addEvent(
+      { title, location, description }, 
+      file
+    );
+
+    if (result?.ok) {
+      alert("Sikeres létrehozás!");
+      setTitle("");
+      setLocation("");
+      setDescription("");
+      setFile(null);
+    } else {
+      alert("Hiba történt!");
+    }
+  };
+
   return (
     <div className='createEvent'>
-      <div class="slider-container">
-  <form id="multiStepForm">
-    <div class="slider" id="slider">
+      <div className="slider-container">
+        <form onSubmit={handleSubmit}>
+          <div 
+            className="slider"
+            style={{
+              display: "flex",
+              transition: "transform 0.4s ease-in-out",
+              transform: `translateX(-${currentIndex * 100}%)`
+            }}
+          >
 
-      <div class="slide">
-        <h3>Step 1</h3>
-        <label>Name</label>
-        <input type="text" required/>
+            <div className="slide" style={{ minWidth: "100%" }}>
+              <h3>Step 1</h3>
+              <input
+                type="text"
+                placeholder="Esemény címe"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="slide" style={{ minWidth: "100%" }}>
+              <h3>Step 2</h3>
+                    <input
+              type="text"
+              placeholder="Helyszín"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+            </div>
+
+            <div className="slide" style={{ minWidth: "100%" }}>
+              <h3>Step 3</h3>
+              <textarea
+        placeholder="Leírás"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+            </div>
+
+            <div className="slide" style={{ minWidth: "100%" }}>
+              <h3>Finish</h3>
+              <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setFile(e.target.files[0])}
+      />
+              <button type="submit">Hozzáadás</button>
+            </div>
+
+          </div>
+
+          <div className="buttons">
+            <button 
+              type="button" 
+              onClick={previous}
+              disabled={currentIndex === 0}
+            >
+              Previous
+            </button>
+
+            <button 
+              type="button" 
+              onClick={next}
+              disabled={currentIndex === totalSlides - 1}
+            >
+              Next
+            </button>
+          </div>
+
+        </form>
       </div>
-
-      <div class="slide">
-        <h3>Step 2</h3>
-        <label>Email</label>
-        <input type="email" required/>
-      </div>
-
-      <div class="slide">
-        <h3>Step 3</h3>
-        <label>Password</label>
-        <input type="password" required/>
-      </div>
-
-      <div class="slide">
-        <h3>Finish</h3>
-        <button type="submit">Submit</button>
-      </div>
-
-    </div>
-
-    <div class="buttons">
-      <button type="button" id="prevBtn" onClick={previous}>Previous</button>
-      <button type="button" id="nextBtn" onClick={next}>Next</button>
-    </div>
-
-  </form>
-</div>
     </div>
   )
 }
