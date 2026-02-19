@@ -352,6 +352,7 @@ input {
 .createEvent button:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
 @media only screen and (max-width: 1300px){
   .GridContainer{
     grid-template-columns: repeat(4, 230px);
