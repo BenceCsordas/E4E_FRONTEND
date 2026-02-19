@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
 import { addEvent } from "../utils";
 const CreateEvent = () => {
-
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [file, setFile] = useState(null);
+  const [description, setDescription] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [preview, setPreview] = useState(null);
   const totalSlides = 4
 
+  const handleFileChange = (e) => {
+  const selected = e.target.files[0];
+  setFile(selected);
+  if (selected) {
+    setPreview(URL.createObjectURL(selected));
+  }
+}
   const next = () => {
     if (currentIndex < totalSlides - 1) {
       setCurrentIndex(prev => prev + 1)
@@ -17,10 +28,6 @@ const CreateEvent = () => {
     }
   }
 
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [file, setFile] = useState(null);
-  const [description, setDescription] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,14 +55,12 @@ const CreateEvent = () => {
           <div 
             className="slider"
             style={{
-              display: "flex",
-              transition: "transform 0.4s ease-in-out",
-              transform: `translateX(-${currentIndex * 100}%)`
+              "--index": currentIndex
             }}
           >
 
             <div className="slide" style={{ minWidth: "100%" }}>
-              <h3>Step 1</h3>
+              <h3>Esemény megnevezése</h3>
               <input
                 type="text"
                 placeholder="Esemény címe"
@@ -66,17 +71,18 @@ const CreateEvent = () => {
             </div>
 
             <div className="slide" style={{ minWidth: "100%" }}>
-              <h3>Step 2</h3>
+              <h3>Helyszín kiválasztása</h3>
                     <input
               type="text"
               placeholder="Helyszín"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
+            
             </div>
 
             <div className="slide" style={{ minWidth: "100%" }}>
-              <h3>Step 3</h3>
+              <h3>Esemény rövid leírása</h3>
               <textarea
         placeholder="Leírás"
         value={description}
@@ -85,13 +91,17 @@ const CreateEvent = () => {
             </div>
 
             <div className="slide" style={{ minWidth: "100%" }}>
-              <h3>Finish</h3>
+              <h3>Kép feltöltése</h3>
               <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
-              <button type="submit">Hozzáadás</button>
+  type="file"
+  className="file"
+  id="file"
+  accept="image/*"
+  onChange={handleFileChange}
+/>
+      <label htmlFor="file" className='imgUpload'>Kép feltöltése</label>
+              {preview && <img src={preview} alt="előnézet" />}
+              <button className='upload' type="submit">Esemény hozzáadása</button>
             </div>
 
           </div>
@@ -102,7 +112,7 @@ const CreateEvent = () => {
               onClick={previous}
               disabled={currentIndex === 0}
             >
-              Previous
+              Előző
             </button>
 
             <button 
@@ -110,7 +120,7 @@ const CreateEvent = () => {
               onClick={next}
               disabled={currentIndex === totalSlides - 1}
             >
-              Next
+              Következő
             </button>
           </div>
 
