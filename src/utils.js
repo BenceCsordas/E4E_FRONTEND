@@ -67,6 +67,15 @@ export const registerUser = async ({ name, email, password }) => {
     return null;
   }
 };
+export const ensureMe = async (name) => {
+  try {
+    const res = await backendApi.post("/users/me/ensure", { name });
+    return res.data; // { ok, created }
+  } catch (error) {
+    console.log("ensureMe hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
 
 export const readMe = async () => {
   try {
