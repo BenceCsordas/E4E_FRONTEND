@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addEvent, readEvents, deleteEvent, readMe } from "../utils";
 
 const Events = () => {
-  // form state
+  // form state (mint a recipe)
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [file, setFile] = useState(null);
@@ -12,51 +12,50 @@ const Events = () => {
   const [events, setEvents] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
 
-  const [loading, setLoading] = useState(true);
+  // ui state
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const loadAll = async () => {
-    try {
-      setLoading(true);
-      setErr("");
-
-      const [eventsData, me] = await Promise.all([
-        readEvents(200),
-        readMe(), // 🔥 saját user
-      ]);
-
-      setEvents(eventsData?.events || []);
-      setCurrentUser(me || null);
-    } catch (e) {
-      setErr("Hiba történt");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // ---- betöltés (recipe stílus: egyszerű useEffect) ----
   useEffect(() => {
     loadAll();
   }, []);
 
+  const loadAll = async () => {
+    setLoading(true);
+    setErr("");
+
+    // 1) események
+    const eventsData = await readEvents(200);
+    setEvents(eventsData?.events || []);
+
+    // 2) saját user
+    const me = await readMe();
+    setCurrentUser(me || null);
+
+    setLoading(false);
+  };
+
+  // ---- create ----
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await addEvent(
-      { title, location, description },
-      file
-    );
+    const result = await addEvent({ title, location, description }, file);
 
     if (result?.ok) {
+      alert("Sikeres létrehozás!");
       setTitle("");
       setLocation("");
       setDescription("");
       setFile(null);
-      await loadAll();
+
+      loadAll();
     } else {
       alert("Hiba történt!");
     }
   };
 
+  // ---- delete ----
   const handleDelete = async (ev) => {
     const ok = confirm(`Biztos törlöd? (${ev.title})`);
     if (!ok) return;
@@ -64,79 +63,84 @@ const Events = () => {
     const res = await deleteEvent(ev.id, ev.imageDeleteUrl);
     if (res?.ok) {
       setEvents((prev) => prev.filter((x) => x.id !== ev.id));
+    } else {
+      alert("Nem sikerült törölni");
     }
   };
 
+  // ---- edit (később) ----
   const handleEdit = (ev) => {
     console.log("Szerkesztés:", ev);
-    // majd ide jön a modal / edit page
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: 16 }}>
+
+  <div className="eventsPage">
+    <div className="eventsHeader">
       <h1>Események</h1>
-      
-      {loading && <p>Betöltés…</p>}
-      {err && <p style={{ color: "red" }}>{err}</p>}
+      <p>Fedezd fel az összes eseményt.</p>
+    </div>
 
-      <div style={{ display: "grid", gap: 16 }}>
-        {events.map((ev) => {
-          const isOwner = currentUser && ev.ownerUid === currentUser.id;
+    {loading && <div className="status">Betöltés…</div>}
+    {err && <div className="status error">{err}</div>}
 
-          return (
-            <div
-              key={ev.id}
-              style={{
-                border: "1px solid #ddd",
-                padding: 12,
-                borderRadius: 12,
-                display: "grid",
-                gap: 8,
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>
-                  <h3 style={{ margin: 0 }}>{ev.title}</h3>
-                  {ev.location && <div>📍 {ev.location}</div>}
-                  {ev.ownerName && (
-                    <div style={{ fontSize: 12, opacity: 0.6 }}>
-                      Szervező: {ev.ownerName}
-                    </div>
-                  )}
+    <div className="eventsGrid">
+      {events.map((ev) => {
+        const isOwner = currentUser && ev.ownerUid === currentUser.id;
+
+        return (
+          <div className="eventCard" key={ev.id}>
+            <div className="eventImageWrap">
+              {ev.imageUrl ? (
+                <img
+                  className="eventImage"
+                  src={ev.imageUrl}
+                  alt={ev.title}
+                />
+              ) : (
+                <div className="eventImagePlaceholder">
+                  Nincs kép
+                </div>
+              )}
+            </div>
+
+            <div className="eventBody">
+              <h3 className="eventTitle">{ev.title}</h3>
+
+              {ev.location && (
+                <div className="eventMeta">📍 {ev.location}</div>
+              )}
+
+              {ev.description && (
+                <p className="eventDesc">{ev.description}</p>
+              )}
+
+              <div className="eventFooter">
+                <div className="eventOwner">
+                  Szervező: {ev.ownerName || "Ismeretlen"}
                 </div>
 
-                {/* 🔥 CSAK SAJÁT ESEMÉNYNÉL */}
                 {isOwner && (
-                  <div style={{ display: "flex", gap: 6 }}>
+                  <div className="eventActions">
                     <button onClick={() => handleEdit(ev)}>
                       Szerkesztés
                     </button>
-
                     <button
+                      className="danger"
                       onClick={() => handleDelete(ev)}
-                      style={{ background: "red", color: "white" }}
                     >
                       Törlés
                     </button>
                   </div>
                 )}
               </div>
-
-              {ev.description && <p>{ev.description}</p>}
-
-              {ev.imageUrl && (
-                <img
-                  src={ev.imageUrl}
-                  alt={ev.title}
-                  style={{ width: "100%", borderRadius: 12 }}
-                />
-              )}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
-  );
+  </div>
+);
 };
 
 export default Events;

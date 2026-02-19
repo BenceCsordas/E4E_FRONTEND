@@ -1,17 +1,20 @@
 import axios from "axios";
-import { getAuth } from "firebase/auth";
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
+import { auth } from "./firebaseApp"; // ⚠️ nálad ez a fájl neve lehet más, igazítsd
 
 export const backendApi = axios.create({
-  baseURL: API_BASE,
+  baseURL: "http://localhost:8000",
 });
+backendApi.interceptors.request.use(
+  async (config) => {
+    const user = auth.currentUser;
 
-backendApi.interceptors.request.use(async (config) => {
-  const user = getAuth().currentUser;
-  if (user) {
-    const token = await user.getIdToken();
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+    if (user) {
+      const token = await user.getIdToken();
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
