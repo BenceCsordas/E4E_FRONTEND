@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { createContext } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { ensureMe } from "../utils";
 import { createUserWithEmailAndPassword, deleteUser, onAuthStateChanged,reauthenticateWithCredential,sendEmailVerification,sendPasswordResetEmail,signInWithEmailAndPassword,signOut, updateProfile } from 'firebase/auth'
 import { auth } from "../firebaseApp"
 // import { uploadImage } from '../cloudinaryUtils'
@@ -15,13 +16,17 @@ export const MyUserProvider = ({children}) => {
   const [msg,setMsg]  = useState({})
   const [user,setUser] = useState(null)
   const navigate = useNavigate()
-  useEffect(()=>{
-    onAuthStateChanged(auth,(currentuser)=>{
-      setUser(currentuser)
-    })
-    return ()=>unsubscribe()
-  },[])
-  
+  useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currentuser) => {
+    setUser(currentuser);
+
+    if (currentuser) {
+      await ensureMe(currentuser.displayName || "");
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
     const signUpUser = async (email, password,displayName)=>{
     console.log(displayName,email,password);
     try {

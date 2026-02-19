@@ -222,6 +222,7 @@ h1 {
     border-top: 1px solid rgba(202, 202, 202, 0.212);
     border-bottom: 1px solid rgba(121, 121, 121, 0.212);
     border-left: 1px solid rgba(121, 121, 121, 0.212);
+  
 }
 
 /*Sign in, Sign up*/
@@ -481,4 +482,116 @@ input {
   .slide textarea {
       min-width: 250px !important;
   }
+}
+
+
+.eventsPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.eventsHeader {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.eventsHeader h1 {
+  margin-bottom: 8px;
+}
+
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.eventCard {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.eventCard:hover {
+  transform: translateY(-4px);
+}
+
+.eventImageWrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.eventImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eventImagePlaceholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3f3;
+  color: #888;
+}
+
+.eventBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eventTitle {
+  margin: 0;
+}
+
+.eventMeta {
+  font-size: 14px;
+  color: #555;
+}
+
+.eventDesc {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* max 3 sor */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.eventFooter {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.eventOwner {
+  font-size: 12px;
+  color: #777;
+}
+
+.eventActions button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.eventActions button:hover {
+  opacity: 0.9;
+}
+
+.danger {
+  background: #e74c3c;
+  color: white;
 }
