@@ -4,6 +4,7 @@ import { FaCog } from "react-icons/fa";
 import { RiPencilFill } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
 import { myUserContext } from '../context/MyContextProvider';
+import Featured from './Featured';
 
 
 const Home = () => {
@@ -29,26 +30,26 @@ const Home = () => {
   />
 </div>
         <div className='GridContainer'>
-            {user ?<div className="div1"  onClick={()=>navigate("/profile")}>
+            {user ?<div className="div1 gdiv"  onClick={()=>navigate("/profile")}>
                 <h1>Profilom</h1>  
                 <FaCog size={150} className='cog'/>
-            </div>:<div className="div1"  onClick={()=>navigate("/signin")}>
+            </div>:<div className="div1 gdiv"  onClick={()=>navigate("/signin")}>
                 <h1>Bejelentkezés</h1>  
                 <FaCog size={150} className='cog'/>
             </div>}
             
-            <div className="div2"  onClick={()=>navigate("/create_event")}> 
+            <div className="div2 gdiv"  onClick={()=>navigate("/create_event")}> 
                 <h1>Esemény létrehozása</h1>
                 <RiPencilFill size={150} className='pencil'/>
             </div>
             
-            <div className="div3"  onClick={()=>navigate("/")}>
+            <div className="div3 gdiv"  onClick={()=>navigate("/")}>
               <h1>WIP</h1>
-              
+              <Featured/>
 
             </div>
             
-            <div className="div4" onClick={()=>navigate("/events")}> 
+            <div className="div4 gdiv" onClick={()=>navigate("/events")}> 
 
                 <h1>Események</h1>
                 {/* <img src="../public/test.gif" alt="asd" style={{backgroundColor:"red"}}/> */}

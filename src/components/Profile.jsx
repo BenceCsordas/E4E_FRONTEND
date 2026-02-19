@@ -19,13 +19,22 @@ const Profile = () => {
   };
   console.log(user)
   return (
-    <div>
-      {user?.displayName}
+  <div className="profile-page">
+    <div className="profile-card">
+      <h2 className="profile-name">{user?.displayName}</h2>
 
-      <button onClick={handleDelete}>Fiók törlése</button>
-      <button onClick={logout}>Kijelentkezés</button>
+      <div className="profile-buttons">
+        <button className="delete-btn" onClick={handleDelete}>
+          Fiók törlése
+        </button>
+
+        <button className="logout-btn" onClick={logout}>
+          Kijelentkezés
+        </button>
+      </div>
     </div>
-  )
+  </div>
+)
 }
 
 export default Profile
