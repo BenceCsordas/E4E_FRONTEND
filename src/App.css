@@ -308,7 +308,7 @@ h1 {
 /* Event create slider */
 .slider-container {
   width: 350px;
-  background: white;
+  background: rgba(77, 0, 100, 0.384);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -319,6 +319,7 @@ h1 {
 .slider {
   display: flex;
   transition: transform 0.4s ease-in-out;
+  
 }
 
 .slide {
