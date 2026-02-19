@@ -42,6 +42,7 @@ h1 {
     
 }
 
+
 .div1 { 
     grid-area: 1 / 1 / 2 / 2; 
     background-color: rgba(187, 187, 187, 0.212);
@@ -303,28 +304,46 @@ h1 {
   min-width: 300px;
   min-height: 300px;
   resize: none;
+  border: none;
+}
+.createEvent textarea:focus, input:focus {
+  border: none;
+  outline: 2px solid #007BFF;
+  border-radius: 2px;
+  
 }
 
 /* Event create slider */
 .slider-container {
-  width: 350px;
-  background: rgba(77, 0, 100, 0.384);
+  width: 450px;
+  /* background: rgba(77, 0, 100, 0.384); */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   overflow: hidden;
   position: relative;
+  
+}
+.slider-container form {
+  overflow: hidden;
+  display: flex;
 }
 
 .slider {
   display: flex;
   transition: transform 0.4s ease-in-out;
-  
+  gap: 20px;
+  transform: translateX(calc(-1 * var(--index) * 105%))
 }
 
 .slide {
   min-width: 100%;
+  height: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
 }
 
 input {
@@ -337,8 +356,12 @@ input {
 
 .createEvent .buttons {
   margin-top: 20px;
+  
   display: flex;
   justify-content: space-between;
+}
+.buttons button {
+  width: 100px;
 }
 
 .createEvent button {
@@ -351,8 +374,36 @@ input {
 }
 
 .createEvent button:disabled {
-  background: #ccc;
+  background: #6fb4ff;
   cursor: not-allowed;
+}
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+.imgUpload {
+  align-self: center;
+  margin: auto;
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+.upload {
+  margin-top: auto;
 }
 @media only screen and (max-width: 1300px){
   .GridContainer{
@@ -364,12 +415,16 @@ input {
   .div1{
       grid-area: doboz1;
   }
+  .div1 h1 {
+    font-size: 1.75rem !important;
+  }
   .div2{
     grid-area: doboz2;
-
+    font-size: smaller;
   }
   .div4{
     grid-area: doboz4;
+    
     
   }
   .div3 {
@@ -390,9 +445,14 @@ input {
   .div1{
       grid-area: doboz1;
   }
+  .div1 h1 {
+    font-size: 1.25rem !important;
+  }
   .div2{
     grid-area: doboz2;
-
+  }
+  .div2 h1 {
+    font-size: 1.25rem !important;
   }
   .div4{
     grid-area: doboz4;
@@ -409,5 +469,16 @@ input {
         "doboz3 doboz3"
         "doboz1 doboz2"
     ;
+  }
+}
+@media only screen and (max-width: 400px){
+  .slider-container{
+    width: 320px;
+  }
+  .slider {
+    transform: translateX(calc(-1 * var(--index) * 108%))
+  }
+  .slide textarea {
+      min-width: 250px !important;
   }
 }
