@@ -82,6 +82,7 @@ const Events = () => {
       <div style={{ display: "grid", gap: 16 }}>
         {events.map((ev) => {
           const isOwner = currentUser && ev.ownerUid === currentUser.id;
+          ev && console.log(ev.ownerUid, currentUser)
 
           return (
             <div

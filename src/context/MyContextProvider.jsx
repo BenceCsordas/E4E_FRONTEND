@@ -91,7 +91,7 @@ export const MyUserProvider = ({children}) => {
       } catch (error) {
         setMsg({error:error.message})
       }
-    }
+    }*/
     const deleteAccount = async(password)=>{
       try {
             const credential = EmailAuthProvider.credential(auth.currentUser.email,password)
@@ -107,9 +107,9 @@ export const MyUserProvider = ({children}) => {
         else setMsg({err:"Hiba történt a profil törlésekor!"})
       }
       
-    }*/
+    }
   return (
-    <myUserContext.Provider value={{user, signUpUser, logoutUser,signInUser,msg,setMsg,resetPassword}}>
+    <myUserContext.Provider value={{user, signUpUser, logoutUser,signInUser,msg,setMsg,resetPassword, deleteAccount}}>
       {children}
     </myUserContext.Provider>
   )
