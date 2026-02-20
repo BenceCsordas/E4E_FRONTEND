@@ -8,6 +8,9 @@ import { SignIn } from './components/SignIn'
 import { SignUp } from './components/SignUp'
 import { AiFillHome } from "react-icons/ai";
 import PwReset from './components/PwReset'
+import PageNotFound from './components/PageNotFound'
+import { ProtectedRoute } from './components/ProtectedRoute'
+import Event from './components/Event'
 
 function App() {
 const navigate = useNavigate()
@@ -17,11 +20,13 @@ const navigate = useNavigate()
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/events" element={<Events/>}/>
-      <Route path="/profile" element={<Profile/>}/>
-      <Route path="/create_event" element={<CreateEvent/>}/>
+      <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+      <Route path="/create_event" element={<ProtectedRoute><CreateEvent/></ProtectedRoute>}/>
+      <Route path="/event/:id" element={<Event/>}/>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
-      <Route path="/pwreset" element={<PwReset/>}/>
+      <Route path="/pwreset" element={<ProtectedRoute><PwReset/></ProtectedRoute>}/>
+      <Route path='/*' element={<PageNotFound/>}/>
     </Routes>
     </div>
   )
