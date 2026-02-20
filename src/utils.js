@@ -110,6 +110,18 @@ export const readEvents = async (limit = 50) => {
   }
 };
 
+export const readEventById = async (id, setEvent) => {
+  try {
+    const res = await backendApi.get(`/events/${id}`);
+    setEvent(res.data)
+    // return res.data; // Egy darab event objektum
+  } catch (error) {
+    console.log("Event read hiba:", error?.response?.data || error.message);
+    return null; 
+  }
+};
+
+
 export const readMyEvents = async (limit = 50) => {
   try {
     const res = await backendApi.get("/events/mine", { params: { limit } });
