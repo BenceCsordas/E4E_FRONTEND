@@ -54,13 +54,15 @@ const Event = () => {
                     </div>
                 </main>
 
-               {user && user.uid == event.ownerUid && <aside className="sidebar-card">
-                    <h4>Műveletek</h4>
+                <aside className="sidebar-card">
                     <div className="button-group">
-                        <button className="btn btn-edit">Szerkesztés</button>
-                        <button className="btn btn-delete">Törlés</button>
+                        <button className="btn btn-sub">Jelentkezés</button>
+                        {user && user.uid == event.ownerUid && <div>
+                            <button className="btn btn-sub">Szerkesztés</button>
+                            <button className="btn btn-delete">Törlés</button>
+                            </div>}
                     </div>
-                </aside>}
+                </aside>
             </div>
         </div>
     )

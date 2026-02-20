@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { addEvent } from "../utils";
+import MapPicker from './MapPicker';
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
+  const [mapsLocation, setMapsLocation] = useState("")
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -33,7 +35,7 @@ const CreateEvent = () => {
     e.preventDefault();
 
     const result = await addEvent(
-      { title, location, description }, 
+      { title, mapsLocation, description }, 
       file
     );
 
@@ -42,12 +44,12 @@ const CreateEvent = () => {
       setTitle("");
       setLocation("");
       setDescription("");
+      setMapsLocation("")
       setFile(null);
     } else {
       alert("Hiba történt!");
     }
   };
-
   return (
     <div className='createEvent'>
       <div className="slider-container">
@@ -78,7 +80,7 @@ const CreateEvent = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
-            
+            <MapPicker setMapsLocation={setMapsLocation}/>
             </div>
 
             <div className="slide" style={{ minWidth: "100%" }}>
