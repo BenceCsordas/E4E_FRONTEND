@@ -37,7 +37,7 @@ const EventCard = ({ev, isOwner, setEvents}) => {
                   alt={ev.title}
                 />
               ) : (
-                <div className="eventImagePlaceholder">
+                <div className="eventImagePlaceholder" onClick={()=>loadEvent(ev)}>
                   Nincs kép
                 </div>
               )}
