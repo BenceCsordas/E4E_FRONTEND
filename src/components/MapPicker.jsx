@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
-
+import "./MapPicker.css"
 const libraries = ['places'];
 const center = { lat: 47.4979, lng: 19.0402 }; // Budapest alapértelmezett
 
-const MapPicker = ({setMapsLocation}) => {
+const MapPicker = ({onAddressSelect}) => {
   const [selectedLocation, setSelectedLocation] = useState(null); // Koordináták mentése
   const [address, setAddress] = useState(""); // Szöveges cím mentése
   const autocompleteRef = useRef(null);
@@ -21,18 +21,18 @@ const MapPicker = ({setMapsLocation}) => {
       // Mentés változókba/state-be
       setSelectedLocation({ lat, lng });
       setAddress(fullAddress);
-      setMapsLocation(fullAddress)
+      onAddressSelect(fullAddress);
 
       console.log("Mentett cím:", fullAddress);
       console.log("Koordináták:", lat, lng);
-console.log("API Kulcs teszt:", import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
+      
 
     }
   };
 
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} libraries={libraries}>
-      <div style={{ padding: "20px" }}>
+      <div style={{}}>
         
         {/* Címkereső beviteli mező */}
         <Autocomplete
@@ -43,6 +43,7 @@ console.log("API Kulcs teszt:", import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
           <input
             type="text"
             placeholder="Keress egy helyszínt..."
+            className="google-search-input"
             style={{
               width: "100%",
               height: "40px",

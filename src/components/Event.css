@@ -2,7 +2,7 @@
 .event-container {
     min-height: 100vh;
 background: #1c1c1c;
-background: linear-gradient(360deg, rgb(46, 43, 43) 10%, rgba(0, 0, 0, 1) 50%);
+background: linear-gradient(360deg, rgb(0, 68, 255) 10%, rgba(0, 0, 0, 1) 50%);
 }
 
 /* Hero Section */
@@ -94,6 +94,7 @@ background: linear-gradient(360deg, rgb(46, 43, 43) 10%, rgba(0, 0, 0, 1) 50%);
 .description-text {
     line-height: 1.6;
     color: #9bb6e2;
+    word-break: break-all;
 }
 
 /* Buttons */

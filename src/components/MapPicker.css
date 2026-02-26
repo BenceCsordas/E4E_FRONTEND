@@ -1,0 +1,9 @@
+google-search-input {
+    color: white !important; /* Fehér betűszín */
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Áttetsző háttér */
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding: 12px 20px;
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+}
