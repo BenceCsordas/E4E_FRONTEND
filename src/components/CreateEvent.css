@@ -1,0 +1,167 @@
+.createEvent {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: radial-gradient(circle at top right, #2a4fa1, #0a0c14),
+                linear-gradient(135deg, #0a0c14 0%, #1a1b2e 100%); */
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+/* Slider konténer - üveghatás */
+.slider-container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Csúszka mechanika */
+.slider {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(calc(var(--index) * -105%));
+}
+
+.slide {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.slide h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Inputok és Textarea */
+input[type="text"],
+textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+textarea {
+    height: 100%;
+    width: 100%;
+    resize: none;
+}
+
+/* Kép feltöltés és Előnézet */
+.file {
+    display: none;
+}
+
+.imgUpload {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.imgUpload:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.slide img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+/* Navigációs gombok alul */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+button[type="button"] {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button[type="button"]:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+button[type="button"]:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Beküldés gomb (Kék, mint a képen) */
+.upload {
+    width: 100%;
+    padding: 14px;
+    background: #007bff;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.upload:hover {
+    background: #0069d9;
+    transform: translateY(-2px);
+}
+
+.upload:active {
+    transform: translateY(0);
+}
+
+/* Reszponzivitás mobilon */
+@media (max-width: 480px) {
+    .slider-container {
+        padding: 10px;
+        max-width: 100%;
+    }
+    
+    .slide h3 {
+        font-size: 1.2rem;
+    }
+}

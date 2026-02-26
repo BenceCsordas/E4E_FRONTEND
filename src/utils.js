@@ -149,8 +149,8 @@ export const addEvent = async (eventData, file) => {
 
     const res = await backendApi.post("/events", {
       title: eventData.title,
-      location: eventData.location,
-      description: eventData.description, // ✅
+      location: eventData.address,
+      description: eventData.description, 
 
       imageUrl,
       imageDeleteUrl,

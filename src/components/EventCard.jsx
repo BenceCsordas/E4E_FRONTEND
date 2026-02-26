@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
 import { deleteEvent } from '../utils';
-
+import "./EventCard.css"
 
 
 const EventCard = ({ev, isOwner, setEvents}) => {
