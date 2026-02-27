@@ -43,8 +43,8 @@ const Home = () => {
                 <RiPencilFill size={150} className='pencil'/>
             </div>
             
-            <div className="div3 gdiv"  onClick={()=>navigate("/")}>
-              <h1>WIP</h1>
+            <div className="div3 gdiv" >
+              
               <Featured/>
 
             </div>

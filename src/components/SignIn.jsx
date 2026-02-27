@@ -22,8 +22,8 @@ export const SignIn = () => {
    }
   return (
     <div className='signin-up-tarolo'>
-      <h1>Jelentkezz be!</h1>
       <form action="submit" onSubmit={handleSubmit}>
+      <h1>Jelentkezz be!</h1>
       <div className='signin'>
         <input name="email" type='email' placeholder='email' />
         <input name="password" type="password" placeholder='jelszó' />

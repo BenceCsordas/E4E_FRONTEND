@@ -1,0 +1,264 @@
+
+
+/* =============================
+   Featured – wrapper
+   ============================= */
+.featured-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Ugyanolyan kék mint a többi fül */
+  /* background: #1a3a8f; */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* =============================
+   Label
+   ============================= */
+.featured-label {
+  position: relative;
+  z-index: 3;
+  padding: 16px 20px 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  user-select: none;
+  text-align: center;
+}
+
+/* =============================
+   Background layers
+   ============================= */
+.featured-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Finom kék árnyalat váltás – nem tolakodó */
+  transition: opacity 0.6s ease;
+  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.15) 100%);
+}
+
+.featured-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.18;
+  filter: blur(2px) saturate(1.4);
+  transition: opacity 0.5s ease;
+}
+
+/* =============================
+   Content
+   ============================= */
+.featured-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px 22px 10px;
+}
+
+.featured-content--enter {
+  animation: fc-enter 0.35s ease both;
+}
+
+.featured-content--exit {
+  animation: fc-exit 0.3s ease both;
+}
+
+.featured-content--idle {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes fc-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fc-exit {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+/* =============================
+   Title
+   ============================= */
+.featured-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.featured-title:hover {
+  opacity: 0.8;
+}
+
+/* =============================
+   Meta (location)
+   ============================= */
+.featured-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 8px;
+}
+
+/* =============================
+   Description
+   ============================= */
+.featured-desc {
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =============================
+   Footer: owner + button
+   ============================= */
+.featured-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.featured-owner {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.featured-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 18px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.featured-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* =============================
+   Navigation
+   ============================= */
+.featured-nav {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 18px 5px;
+}
+
+.featured-arrow {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  padding: 0;
+}
+
+.featured-arrow:hover {
+  background: rgba(255, 255, 255, 0.17);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* =============================
+   Dots
+   ============================= */
+.featured-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.featured-dot {
+  padding: 0;
+  height: 6px;
+  width: 6px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.22);
+  border: none;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.featured-dot--active {
+  width: 20px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* =============================
+   Progress bar
+   ============================= */
+.featured-progress {
+  position: relative;
+  z-index: 3;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.featured-progress__bar {
+  height: 100%;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.55);
+  animation: progress-run 4.5s linear forwards;
+}
+
+@keyframes progress-run {
+  from { width: 0%; }
+  to   { width: 100%; }
+}

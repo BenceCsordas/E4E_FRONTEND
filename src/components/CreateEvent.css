@@ -44,6 +44,8 @@
     background: linear-gradient(to right, #ffffff, #a5b4fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
 }
 
 /* Inputok és Textarea */
@@ -105,8 +107,8 @@ textarea {
 .buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
     gap: 15px;
+    margin: 30px 5px 20px 5px;
 }
 
 button[type="button"] {

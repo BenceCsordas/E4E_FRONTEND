@@ -25,7 +25,7 @@ const navigate = useNavigate()
       <Route path="/event/:id" element={<Event/>}/>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
-      <Route path="/pwreset" element={<ProtectedRoute><PwReset/></ProtectedRoute>}/>
+      <Route path="/pwreset" element={<PwReset/>}/>
       <Route path='/*' element={<PageNotFound/>}/>
     </Routes>
     </div>
