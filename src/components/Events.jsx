@@ -37,25 +37,7 @@ const Events = () => {
     setLoading(false);
   };
 
-  // ---- create ----
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const result = await addEvent({ title, location, description }, file);
-
-    if (result?.ok) {
-      alert("Sikeres létrehozás!");
-      setTitle("");
-      setLocation("");
-      setDescription("");
-      setFile(null);
-
-      loadAll();
-      Navigate("/events")
-    } else {
-      alert("Hiba történt!");
-    }
-  };
+  
 
   
 

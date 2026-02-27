@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { myUserContext } from '../context/MyContextProvider'
 
 export const SignUp = () => {
+  const navigate = useNavigate()
   const {signUpUser,msg} = useContext(myUserContext)
   const [loading,setLoading] = useState(false)
   const handleSubmit=async(event)=>{
@@ -18,20 +19,22 @@ export const SignUp = () => {
       {msg}
     }finally{
       setLoading(false)
+      navigate("/signin")
     }
     
   }
   return (
     <div className='signin-up-tarolo signup-tarolo'>
-      <h1>Regisztrálj!</h1>
       <form action="submit" onSubmit={handleSubmit}>
+      <h1>Regisztrálj!</h1>
       <div className='signin'>
-        <input name='email' type='email' placeholder='email' style={{color:"black"}}/>
-        <input name="password" type="password" placeholder='jelszó' style={{color:"black"}}/>
-        <input name="displayName" type="text" placeholder='felhasználónév' style={{color:"black"}}/>
+        <input name='email' type='email' placeholder='email' />
+        <input name="password" type="password" placeholder='jelszó' />
+        <input name="displayName" type="text" placeholder='felhasználónév' />
         <button className='gomb' disabled={loading}><b>{loading? "Regisztráció folyamatban" :"Regisztráció"}</b></button>
       </div>
       </form>
+      <div><a href='' onClick={()=>navigate("/signin")}>Vissza</a></div>
     </div>
   )
 }

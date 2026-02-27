@@ -11,17 +11,16 @@ const PwReset = () => {
         await resetPassword(data.get("email"))
     }
     return (
-    <div className='signinup'>
-      <div>
-        <form onSubmit={handleSubmit} className='pwresetform'>
-        <h3>Add meg az e-mail címedet a jelszóváltoztatás igényléséhez</h3>
-            <div>
-                
-                <input type="email" placeholder='email' name='email'/>
-            </div>
-            <button>Új jelszó igénylése</button>
+    <div className='signin-up-tarolo'>
+      
+        <form onSubmit={handleSubmit} style={{margin:"10px"}}>
+                <h3 style={{textAlign:"center"}}>Add meg az e-mail címedet a jelszóváltoztatás igényléséhez</h3>
+                <div className="signin">
+                    <input type="email" placeholder='email' name='email'/>
+                    <button className='gomb'>Új jelszó igénylése</button>
+                </div>
         </form>
-      </div>
+      
       
     </div>
   )
