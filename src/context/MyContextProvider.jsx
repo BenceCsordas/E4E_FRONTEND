@@ -20,7 +20,7 @@ export const MyUserProvider = ({children}) => {
   const unsubscribe = onAuthStateChanged(auth, async (currentuser) => {
     setUser(currentuser);
 
-    if (currentuser) {
+    if (currentuser && currentuser.emailVerified) {
       await ensureMe(currentuser.displayName || "");
     }
   });
