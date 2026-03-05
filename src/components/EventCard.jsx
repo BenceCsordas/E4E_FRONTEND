@@ -48,10 +48,10 @@ const EventCard = ({ev, isOwner, setEvents}) => {
     };
 
     return (
-        <div className="eventCard" key={ev.id}>
+        <div className="eventCard" key={ev.id} onClick={() => loadEvent(ev)}>
             <div className="eventImageWrap">
                 {firstImage ? (
-                    <div className="eventImageContainer" onClick={() => loadEvent(ev)}>
+                    <div className="eventImageContainer" >
                         <img
                             className="eventImage"
                             src={firstImage}
@@ -64,7 +64,7 @@ const EventCard = ({ev, isOwner, setEvents}) => {
                         )}
                     </div>
                 ) : (
-                    <div className="eventImagePlaceholder" onClick={() => loadEvent(ev)}>
+                    <div className="eventImagePlaceholder">
                         Nincs kép
                     </div>
                 )}
@@ -85,20 +85,6 @@ const EventCard = ({ev, isOwner, setEvents}) => {
                     <div className="eventOwner">
                         Szervező: {ev.ownerName || "Ismeretlen"}
                     </div>
-
-                    {isOwner && (
-                        <div className="eventActions">
-                            <button onClick={() => handleEdit(ev)}>
-                                Szerkesztés
-                            </button>
-                            <button
-                                className="danger"
-                                onClick={() => handleDelete(ev)}
-                            >
-                                Törlés
-                            </button>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
