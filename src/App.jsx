@@ -11,6 +11,7 @@ import PwReset from './components/PwReset'
 import PageNotFound from './components/PageNotFound'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import Event from './components/Event'
+import EditEvent from './components/EditEvent'
 
 function App() {
 const navigate = useNavigate()
@@ -22,6 +23,7 @@ const navigate = useNavigate()
       <Route path="/events" element={<Events/>}/>
       <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
       <Route path="/create_event" element={<ProtectedRoute><CreateEvent/></ProtectedRoute>}/>
+      <Route path="/event/:id/edit" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
       <Route path="/event/:id" element={<Event/>}/>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/signup" element={<SignUp/>}/>
