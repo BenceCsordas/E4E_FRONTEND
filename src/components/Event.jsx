@@ -136,9 +136,18 @@ const Event = () => {
 
                     <aside className="sidebar-card">
                         <h3>Helyszín</h3>
-                        <h3><span className='locationText'>{event.location}</span></h3>
+                        <h3>
+                            <a 
+                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className='locationText'
+                            >
+                                {event.location}
+                            </a>
+                        </h3>
                         <EventMap address={event.location} />
-                    </aside>
+                </aside>
                 </div>
             </div>
         </div>

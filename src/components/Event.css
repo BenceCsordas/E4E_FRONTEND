@@ -253,6 +253,12 @@
 .locationText {
     color: #9bb6e2;
 }
+.sidebar-card h3 a{
+    transition: all ease-in-out 0.1s;
+}
+.sidebar-card h3 a:hover {
+    color: #c8d0db;
+}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {

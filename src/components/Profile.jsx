@@ -15,6 +15,7 @@ const Profile = () => {
     if (window.confirm("Biztosan törölni akarja fiókját?")) {
       const pw = prompt("Add meg a jelszavad a fiók törléséhez: ");
       await deleteAccount(pw)
+      navigate("/")
     }
   };
   console.log(user)

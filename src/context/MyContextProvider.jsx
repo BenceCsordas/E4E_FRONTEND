@@ -27,27 +27,22 @@ export const MyUserProvider = ({children}) => {
 
   return () => unsubscribe();
 }, []);
-    const signUpUser = async (email, password,displayName)=>{
-    console.log(displayName,email,password);
-    try {
-      await createUserWithEmailAndPassword(auth,email,password)
-      await updateProfile(auth.currentUser,{displayName})
-      await sendEmailVerification(auth.currentUser)
-      console.log("Az emailedre aktiváló link érkezett!");
-      
-      console.log("Sikeres regisztráció!");
-      setMsg({signUp:"Kattints az emailben kaptt aktiváló linkre"})
-      logoutUser()
-    } catch (e) {
-      console.log("Bejelentkezési hiba: " + e);
-      setMsg({err:e.message})
-      
-    }
+
+    const signUpUser = async (email, password, displayName) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password)
+    await updateProfile(auth.currentUser, {displayName})
+    await sendEmailVerification(auth.currentUser)
+    setMsg({signUp: "Kattints az emailben kapott aktiváló linkre!"})
+    await logoutUser(true) // ← silent: nem írja felül a msg-t
+  } catch (e) {
+    setMsg({err: e.message})
   }
-    const logoutUser = async ()=>{
-      await signOut(auth)
-      setMsg({signIn:false})
-    }
+}
+    const logoutUser = async (silent = false) => {
+  await signOut(auth)
+  if (!silent) setMsg({signIn: false})
+}
     const signInUser = async(email,password)=>{
       try {
           await signInWithEmailAndPassword(auth,email,password)

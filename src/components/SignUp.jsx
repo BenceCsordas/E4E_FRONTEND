@@ -32,6 +32,7 @@ export const SignUp = () => {
         <input name="password" type="password" placeholder='jelszó' />
         <input name="displayName" type="text" placeholder='felhasználónév' />
         <button className='gomb' disabled={loading}><b>{loading? "Regisztráció folyamatban" :"Regisztráció"}</b></button>
+         
       </div>
       </form>
       <div><a href='' onClick={()=>navigate("/signin")}>Vissza</a></div>
