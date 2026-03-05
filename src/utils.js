@@ -46,6 +46,17 @@ export const uploadImage = async (file) => {
   }
 };
 
+// Több kép feltöltése egyszerre
+// files: File[] tömb
+// Visszatér: [{ url, delete_url }, ...]
+export const uploadImages = async (files) => {
+  if (!files || files.length === 0) return [];
+
+  const results = await Promise.all(files.map((file) => uploadImage(file)));
+  // null értékeket kiszűrjük
+  return results.filter((r) => r?.url);
+};
+
 export const deleteImage = async (delete_url) => {
   try {
     if (!delete_url) return;
@@ -53,6 +64,14 @@ export const deleteImage = async (delete_url) => {
   } catch (error) {
     console.log("Képtörlési hiba (backend):", error?.response?.data || error.message);
   }
+};
+
+// Több kép törlése egyszerre
+export const deleteImages = async (images) => {
+  if (!images || images.length === 0) return;
+  await Promise.all(
+    images.map((img) => img?.delete_url ? deleteImage(img.delete_url) : Promise.resolve())
+  );
 };
 
 // ---------------------------
@@ -67,6 +86,7 @@ export const registerUser = async ({ name, email, password }) => {
     return null;
   }
 };
+
 export const ensureMe = async (name) => {
   try {
     const res = await backendApi.post("/users/me/ensure", { name });
@@ -113,14 +133,12 @@ export const readEvents = async (limit = 50) => {
 export const readEventById = async (id, setEvent) => {
   try {
     const res = await backendApi.get(`/events/${id}`);
-    setEvent(res.data)
-    // return res.data; // Egy darab event objektum
+    setEvent(res.data);
   } catch (error) {
     console.log("Event read hiba:", error?.response?.data || error.message);
-    return null; 
+    return null;
   }
 };
-
 
 export const readMyEvents = async (limit = 50) => {
   try {
@@ -132,28 +150,28 @@ export const readMyEvents = async (limit = 50) => {
   }
 };
 
-// eventData: { title, location }
-// file: optional kép
-export const addEvent = async (eventData, file) => {
+export const readRegisteredEvents = async (limit = 50) => {
   try {
-    let imageUrl = null;
-    let imageDeleteUrl = null;
+    const res = await backendApi.get("/events/registered", { params: { limit } });
+    return res.data;
+  } catch (error) {
+    console.log("Registered events read hiba:", error?.response?.data || error.message);
+    return { count: 0, events: [] };
+  }
+};
 
-    if (file) {
-      const up = await uploadImage(file);
-      if (up?.url) {
-        imageUrl = up.url;
-        imageDeleteUrl = up.delete_url || null;
-      }
-    }
+// eventData: { title, address, description }
+// files: File[] tömb (több kép)
+export const addEvent = async (eventData, files = []) => {
+  try {
+    // Több kép feltöltése párhuzamosan
+    const images = await uploadImages(files);
 
     const res = await backendApi.post("/events", {
       title: eventData.title,
       location: eventData.address,
-      description: eventData.description, 
-
-      imageUrl,
-      imageDeleteUrl,
+      description: eventData.description,
+      images, // [{ url, delete_url }, ...]
     });
 
     return res.data;
@@ -163,34 +181,28 @@ export const addEvent = async (eventData, file) => {
   }
 };
 
-
-// updateData: { title, location, imageUrl?, imageDeleteUrl? }
-// file: optional új kép -> feltölt + régi töröl
-export const updateEvent = async (id, updateData, file) => {
+// updateData: { title, location, description, images? }
+// newFiles: File[] tömb – új képek feltöltése
+// removedImages: [{ url, delete_url }] – törlendő képek
+export const updateEvent = async (id, updateData, newFiles = [], removedImages = []) => {
   try {
-    let imageUrl = updateData.imageUrl ?? null;
-    let imageDeleteUrl = updateData.imageDeleteUrl ?? null;
+    // 1. Régi képek törlése
+    await deleteImages(removedImages);
 
-    if (file) {
-      const up = await uploadImage(file);
+    // 2. Új képek feltöltése
+    const uploadedImages = await uploadImages(newFiles);
 
-      if (up?.url) {
-        // régi törlése
-        if (imageDeleteUrl) await deleteImage(imageDeleteUrl);
+    // 3. Meglévő képek + új képek összefűzése
+    const existingImages = (updateData.images || []).filter(
+      (img) => !removedImages.some((r) => r.url === img.url)
+    );
+    const allImages = [...existingImages, ...uploadedImages];
 
-        imageUrl = up.url;
-        imageDeleteUrl = up.delete_url || null;
-      }
-    }
-
-    // itt a backend PUT jelenleg csak title+location-t frissít
-    // ezért: előbb frissítjük title/location, majd egy "patch" update a képre egy külön végpont híján:
-    // Megoldás: a backend PUT-ba beleraktuk a képet is (lásd backend kód lent).
     const res = await backendApi.put(`/events/${id}`, {
       title: updateData.title,
       location: updateData.location,
-      imageUrl,
-      imageDeleteUrl,
+      description: updateData.description,
+      images: allImages,
     });
 
     return res.data;
@@ -200,15 +212,48 @@ export const updateEvent = async (id, updateData, file) => {
   }
 };
 
-export const deleteEvent = async (id, imageDeleteUrl) => {
+export const deleteEvent = async (id, images = []) => {
   try {
-    // előbb kép törlés
-    if (imageDeleteUrl) await deleteImage(imageDeleteUrl);
+    // összes kép törlése
+    await deleteImages(images);
 
     const res = await backendApi.delete(`/events/${id}`);
     return res.data;
   } catch (error) {
     console.log("Event delete hiba:", error?.response?.data || error.message);
     return null;
+  }
+};
+
+// ---------------------------
+// REGISTRATIONS
+// ---------------------------
+export const registerToEvent = async (eventId) => {
+  try {
+    const res = await backendApi.post(`/events/${eventId}/register`);
+    return res.data; // { ok, msg }
+  } catch (error) {
+    console.log("Jelentkezés hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+export const unregisterFromEvent = async (eventId) => {
+  try {
+    const res = await backendApi.delete(`/events/${eventId}/register`);
+    return res.data; // { ok, msg }
+  } catch (error) {
+    console.log("Leiratkozás hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+export const readEventRegistrations = async (eventId) => {
+  try {
+    const res = await backendApi.get(`/events/${eventId}/registrations`);
+    return res.data; // { count, registrations }
+  } catch (error) {
+    console.log("Jelentkezők read hiba:", error?.response?.data || error.message);
+    return { count: 0, registrations: [] };
   }
 };

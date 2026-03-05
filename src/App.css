@@ -17,13 +17,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+   
 }
 h1 {
     text-align: center;
 }
 .home-icon {
-  position: absolute;
+  position: fixed;
   top: 5px;
   left: 5px;
   cursor: pointer;
