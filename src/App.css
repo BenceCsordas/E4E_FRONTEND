@@ -27,6 +27,7 @@ h1 {
   top: 5px;
   left: 5px;
   cursor: pointer;
+  z-index: 1000;
 }
 
 .HomeContainer {
@@ -511,7 +512,7 @@ input {
   }
   
   .eventsPage {
-    padding: 0px 16px;
+    padding: 32px 16px !important;
   }
   .eventsGrid{
     justify-items: center;
@@ -520,6 +521,11 @@ input {
   .eventCard {
     width: 288px;
   }
+}
+@media only screen and (max-width: 350px){
+  .eventsPage {
+      padding: 32px 8px !important;
+    }
 }
 
 
@@ -717,4 +723,11 @@ input {
 .delete-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(255, 75, 43, 0.5);
+}
+
+.pac-container,
+.pac-item,
+.pac-item-query,
+.pac-matched {
+  color: black !important;
 }
