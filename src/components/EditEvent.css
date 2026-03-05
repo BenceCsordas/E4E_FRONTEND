@@ -1,0 +1,183 @@
+/* ================================
+   EditEvent.css
+   Illeszkedik az Event.css stílushoz
+   ================================ */
+
+/* Hibaüzenet */
+.edit-error {
+  background: rgba(220, 38, 38, 0.15);
+  color: #fca5a5;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  font-size: 14px;
+}
+
+/* Form mezők wrapper */
+.edit-field {
+  margin-bottom: 20px;
+}
+
+.edit-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #eff5ff;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.edit-input,
+.edit-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
+  color: white;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+  font-weight: normal;
+}
+
+.edit-input::placeholder,
+.edit-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  border-color: #0068ca;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.edit-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Képek szekció */
+.edit-images-section {
+  margin-bottom: 24px;
+}
+
+.edit-images-subtitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 8px;
+  font-weight: normal;
+}
+
+/* Thumbnail grid */
+.edit-thumb-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.edit-thumb-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: border-color 0.2s;
+}
+
+.edit-thumb-container:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.edit-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-thumb-remove {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: rgba(220, 38, 38, 0.85) !important;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  line-height: 1;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.edit-thumb-remove:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.edit-thumb-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 104, 202, 0.8);
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 0 0 6px 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Fájl feltöltő gomb */
+.edit-upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.edit-upload-label:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+/* Gombok sor */
+.edit-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Centered wrapper override */
+.edit-centered-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-main-card {
+  max-width: 700px;
+  width: 100%;
+}
