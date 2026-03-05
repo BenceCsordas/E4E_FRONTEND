@@ -16,13 +16,13 @@ const Event = () => {
     const { id } = useParams()
 
     useEffect(() => {
-    if (id) {
-        readEventById(id, (data) => {
-            setEvent(data);
-            setLoading(false);
-        });
-    }
-}, [id])
+        if (id) {
+            readEventById(id, (data) => {
+                setEvent(data);
+                setLoading(false);
+            });
+        }
+    }, [id])
 
     useEffect(() => {
         if (!user || !event) return;
@@ -158,7 +158,13 @@ const Event = () => {
                             <button className="btn btn-sub" onClick={() => navigate("/events")}>Vissza</button>
                             {user && user.uid === event.ownerUid && (
                                 <div className="owner-actions">
-                                    <button className="btn btn-sub">Szerkesztés</button>
+                                    {/* ✅ JAVÍTVA: navigate az edit oldalra */}
+                                    <button
+                                        className="btn btn-sub"
+                                        onClick={() => navigate(`/event/${event.id}/edit`)}
+                                    >
+                                        Szerkesztés
+                                    </button>
                                     <button className="btn btn-delete" onClick={() => handleDelete(event)}>Törlés</button>
                                 </div>
                             )}
@@ -168,15 +174,13 @@ const Event = () => {
                     <aside className="sidebar-card">
                         <h3>Helyszín</h3>
                         <a
-                            
-                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className='locationText'
-                            >
-                                {event.location}
-                            </a>
-                        
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className='locationText'
+                        >
+                            {event.location}
+                        </a>
                         <EventMap address={event.location} />
                     </aside>
                 </div>
