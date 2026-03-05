@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { myUserContext } from '../context/MyContextProvider'
 import { readEventById, updateEvent } from '../utils'
+import './EditEvent.css'
 
 const EditEvent = () => {
     const { user } = useContext(myUserContext)
@@ -19,10 +20,10 @@ const EditEvent = () => {
     const [description, setDescription] = useState('')
 
     // Images
-    const [existingImages, setExistingImages] = useState([])   // [{ url, delete_url }]
-    const [removedImages, setRemovedImages] = useState([])     // képek amiket törlünk
-    const [newFiles, setNewFiles] = useState([])               // File[] - újonnan hozzáadott képek
-    const [newPreviews, setNewPreviews] = useState([])         // base64 preview az új képekhez
+    const [existingImages, setExistingImages] = useState([])
+    const [removedImages, setRemovedImages] = useState([])
+    const [newFiles, setNewFiles] = useState([])
+    const [newPreviews, setNewPreviews] = useState([])
 
     const fileInputRef = useRef()
 
@@ -34,7 +35,6 @@ const EditEvent = () => {
                 setLocation(data.location || '')
                 setDescription(data.description || '')
 
-                // Képek betöltése - támogatja mind a régi (imageUrl) mind az új (images[]) formátumot
                 if (Array.isArray(data.images) && data.images.length > 0) {
                     setExistingImages(data.images)
                 } else if (data.imageUrl) {
@@ -48,7 +48,6 @@ const EditEvent = () => {
         }
     }, [id])
 
-    // Ha nem a tulajdonos, visszairányítjuk
     useEffect(() => {
         if (!loading && event && user && user.uid !== event.ownerUid) {
             navigate(`/event/${id}`)
@@ -66,7 +65,6 @@ const EditEvent = () => {
 
         setNewFiles(prev => [...prev, ...files])
 
-        // Preview generálás
         files.forEach(file => {
             const reader = new FileReader()
             reader.onload = (ev) => {
@@ -75,7 +73,6 @@ const EditEvent = () => {
             reader.readAsDataURL(file)
         })
 
-        // Reset input hogy ugyanazt a fájlt újra lehessen választani
         if (fileInputRef.current) fileInputRef.current.value = ''
     }
 
@@ -124,79 +121,65 @@ const EditEvent = () => {
                 </div>
             </div>
 
-            <div className="event-content-wrapper" style={{ display: 'flex', justifyContent: 'center' }}>
-                <main className="main-card" style={{ maxWidth: 700, width: '100%' }}>
+            <div className="event-content-wrapper edit-centered-wrapper">
+                <main className="main-card edit-main-card">
 
                     {error && (
-                        <div style={{
-                            background: '#fee2e2', color: '#dc2626',
-                            padding: '12px 16px', borderRadius: 8, marginBottom: 16,
-                            border: '1px solid #fca5a5'
-                        }}>
-                            {error}
-                        </div>
+                        <div className="edit-error">{error}</div>
                     )}
 
                     {/* Cím */}
-                    <div style={{ marginBottom: 20 }}>
-                        <label style={{ display: 'block', fontWeight: 600, marginBottom: 6, color: '#374151' }}>
-                            Cím *
-                        </label>
+                    <div className="edit-field">
+                        <label className="edit-label">Cím *</label>
                         <input
                             type="text"
                             value={title}
                             onChange={e => setTitle(e.target.value)}
                             placeholder="Esemény neve"
-                            style={inputStyle}
+                            className="edit-input"
                         />
                     </div>
 
                     {/* Helyszín */}
-                    <div style={{ marginBottom: 20 }}>
-                        <label style={{ display: 'block', fontWeight: 600, marginBottom: 6, color: '#374151' }}>
-                            Helyszín
-                        </label>
+                    <div className="edit-field">
+                        <label className="edit-label">Helyszín</label>
                         <input
                             type="text"
                             value={location}
                             onChange={e => setLocation(e.target.value)}
                             placeholder="pl. Budapest, Deák Ferenc tér"
-                            style={inputStyle}
+                            className="edit-input"
                         />
                     </div>
 
                     {/* Leírás */}
-                    <div style={{ marginBottom: 20 }}>
-                        <label style={{ display: 'block', fontWeight: 600, marginBottom: 6, color: '#374151' }}>
-                            Leírás
-                        </label>
+                    <div className="edit-field">
+                        <label className="edit-label">Leírás</label>
                         <textarea
                             value={description}
                             onChange={e => setDescription(e.target.value)}
                             placeholder="Esemény részletes leírása..."
                             rows={5}
-                            style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
+                            className="edit-textarea"
                         />
                     </div>
 
                     {/* Képek kezelése */}
-                    <div style={{ marginBottom: 24 }}>
-                        <label style={{ display: 'block', fontWeight: 600, marginBottom: 10, color: '#374151' }}>
-                            Képek ({totalImages} db)
-                        </label>
+                    <div className="edit-images-section">
+                        <label className="edit-label">Képek ({totalImages} db)</label>
 
                         {/* Meglévő képek */}
                         {existingImages.length > 0 && (
-                            <div style={{ marginBottom: 12 }}>
-                                <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 8 }}>Jelenlegi képek:</p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                            <div>
+                                <p className="edit-images-subtitle">Jelenlegi képek:</p>
+                                <div className="edit-thumb-grid">
                                     {existingImages.map((img, i) => (
-                                        <div key={i} style={thumbContainer}>
-                                            <img src={img.url} alt={`kép ${i + 1}`} style={thumbImg} />
+                                        <div key={i} className="edit-thumb-container">
+                                            <img src={img.url} alt={`kép ${i + 1}`} className="edit-thumb-img" />
                                             <button
                                                 type="button"
                                                 onClick={() => handleRemoveExisting(img)}
-                                                style={removeBtn}
+                                                className="edit-thumb-remove"
                                                 title="Kép eltávolítása"
                                             >
                                                 ✕
@@ -209,29 +192,21 @@ const EditEvent = () => {
 
                         {/* Új képek preview */}
                         {newPreviews.length > 0 && (
-                            <div style={{ marginBottom: 12 }}>
-                                <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 8 }}>Új képek (feltöltésre vár):</p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                            <div>
+                                <p className="edit-images-subtitle">Új képek (feltöltésre vár):</p>
+                                <div className="edit-thumb-grid">
                                     {newPreviews.map((p, i) => (
-                                        <div key={i} style={thumbContainer}>
-                                            <img src={p.preview} alt={p.name} style={thumbImg} />
+                                        <div key={i} className="edit-thumb-container">
+                                            <img src={p.preview} alt={p.name} className="edit-thumb-img" />
                                             <button
                                                 type="button"
                                                 onClick={() => handleRemoveNew(i)}
-                                                style={removeBtn}
+                                                className="edit-thumb-remove"
                                                 title="Kép eltávolítása"
                                             >
                                                 ✕
                                             </button>
-                                            <div style={{
-                                                position: 'absolute', bottom: 0, left: 0, right: 0,
-                                                background: 'rgba(0,0,0,0.55)', color: '#fff',
-                                                fontSize: 10, padding: '2px 4px',
-                                                borderRadius: '0 0 6px 6px',
-                                                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
-                                            }}>
-                                                Új
-                                            </div>
+                                            <div className="edit-thumb-badge">Új</div>
                                         </div>
                                     ))}
                                 </div>
@@ -239,8 +214,7 @@ const EditEvent = () => {
                         )}
 
                         {/* Fájl feltöltő */}
-                        <label style={uploadLabel}>
-                            <span style={{ fontSize: 22 }}>📷</span>
+                        <label className="edit-upload-label">
                             <span>Képek hozzáadása</span>
                             <input
                                 ref={fileInputRef}
@@ -254,15 +228,14 @@ const EditEvent = () => {
                     </div>
 
                     {/* Gombok */}
-                    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    <div className="edit-actions">
                         <button
                             type="button"
                             onClick={handleSubmit}
                             disabled={saving}
                             className="btn btn-sub"
-                            style={{ minWidth: 120 }}
                         >
-                            {saving ? 'Mentés...' : '💾 Mentés'}
+                            {saving ? 'Mentés...' : 'Mentés'}
                         </button>
                         <button
                             type="button"
@@ -277,68 +250,6 @@ const EditEvent = () => {
             </div>
         </div>
     )
-}
-
-// --- Stílusok ---
-const inputStyle = {
-    width: '100%',
-    padding: '10px 14px',
-    borderRadius: 8,
-    border: '1.5px solid #d1d5db',
-    fontSize: 15,
-    outline: 'none',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.2s',
-    fontFamily: 'inherit',
-}
-
-const thumbContainer = {
-    position: 'relative',
-    width: 90,
-    height: 90,
-    borderRadius: 8,
-    overflow: 'hidden',
-    border: '2px solid #e5e7eb',
-}
-
-const thumbImg = {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-}
-
-const removeBtn = {
-    position: 'absolute',
-    top: 3,
-    right: 3,
-    background: 'rgba(220,38,38,0.85)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '50%',
-    width: 22,
-    height: 22,
-    cursor: 'pointer',
-    fontSize: 11,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 0,
-    lineHeight: 1,
-}
-
-const uploadLabel = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 8,
-    padding: '10px 18px',
-    background: '#f3f4f6',
-    border: '2px dashed #9ca3af',
-    borderRadius: 8,
-    cursor: 'pointer',
-    fontSize: 14,
-    color: '#374151',
-    fontWeight: 500,
-    transition: 'background 0.2s',
 }
 
 export default EditEvent
