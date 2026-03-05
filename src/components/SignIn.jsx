@@ -28,6 +28,7 @@ export const SignIn = () => {
         <input name="email" type='email' placeholder='email' />
         <input name="password" type="password" placeholder='jelszó' />
         {msg && msg?.err && <p className='message'>{msg.err}</p>}
+        {msg && msg?.signUp && <p className='message'>{msg.signUp}</p>}
         <button className='gomb'><b>Bejelentkezés</b></button>
       </div>
       </form>
