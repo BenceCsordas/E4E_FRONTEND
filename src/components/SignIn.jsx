@@ -17,7 +17,7 @@ export const SignIn = () => {
    const handleSubmit= (event)=>{
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log(data.get('email'), data.get('password'));
+    
     signInUser(data.get('email'),data.get('password'))
    }
   return (

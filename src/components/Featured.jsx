@@ -5,6 +5,17 @@ import { useNavigate } from "react-router";
 
 const Featured = () => {
    const navigate = useNavigate();
+
+   const getFirstImage = (ev) => {
+        if (Array.isArray(ev.images) && ev.images.length > 0) {
+            return ev.images[0].url;
+        }
+        if (ev.imageUrl) {
+            return ev.imageUrl;
+        }
+        return null;
+    };
+
     // data state
     const [events, setEvents] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
@@ -107,8 +118,8 @@ const Featured = () => {
       <div className="featured-bg" />
 
       {/* Háttérkép ha van */}
-      {ev.imageUrl && (
-        <img className="featured-bg-img" src={ev.imageUrl} alt={ev.title} />
+      {getFirstImage(ev) && (
+        <img className="featured-bg-img" src={getFirstImage(ev)} alt={ev.title} />
       )}
 
       {/* Tartalom */}
