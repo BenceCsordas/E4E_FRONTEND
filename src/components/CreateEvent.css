@@ -3,8 +3,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background: radial-gradient(circle at top right, #2a4fa1, #0a0c14),
-                linear-gradient(135deg, #0a0c14 0%, #1a1b2e 100%); */
     padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
@@ -32,6 +30,7 @@
 }
 
 .slide {
+    min-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -59,6 +58,7 @@ textarea {
     color: white;
     font-size: 1rem;
     transition: all 0.3s;
+    box-sizing: border-box;
 }
 
 input[type="text"]:focus,
@@ -70,12 +70,11 @@ textarea:focus {
 }
 
 textarea {
-    height: 100%;
-    width: 100%;
+    height: 120px;
     resize: none;
 }
 
-/* Kép feltöltés és Előnézet */
+/* Kép feltöltés gomb */
 .file {
     display: none;
 }
@@ -89,18 +88,90 @@ textarea {
     border-radius: 12px;
     cursor: pointer;
     transition: background 0.3s;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.8);
 }
 
 .imgUpload:hover {
     background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
-.slide img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+/* Placeholder ha nincs kép */
+.placeholder-preview {
+    text-align: center;
+    padding: 20px;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.9rem;
+    border: 1px dashed rgba(255,255,255,0.1);
     border-radius: 12px;
-    margin-top: 10px;
+}
+
+/* Képrács – több kép megjelenítése */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.image-grid::-webkit-scrollbar {
+    width: 4px;
+}
+.image-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+.image-grid::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+/* Egyedi kép a gridben */
+.image-thumb-wrapper {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+}
+
+.image-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s;
+}
+
+.image-thumb-wrapper:hover .image-thumb {
+    transform: scale(1.05);
+}
+
+/* X gomb az egyes képeken */
+.remove-img-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    font-size: 0.65rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 0;
+}
+
+.image-thumb-wrapper:hover .remove-img-btn {
+    opacity: 1;
 }
 
 /* Navigációs gombok alul */
@@ -132,7 +203,7 @@ button[type="button"]:disabled {
     cursor: not-allowed;
 }
 
-/* Beküldés gomb (Kék, mint a képen) */
+/* Beküldés gomb */
 .upload {
     width: 100%;
     padding: 14px;
@@ -162,8 +233,12 @@ button[type="button"]:disabled {
         padding: 10px;
         max-width: 100%;
     }
-    
+
     .slide h3 {
         font-size: 1.2rem;
+    }
+
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

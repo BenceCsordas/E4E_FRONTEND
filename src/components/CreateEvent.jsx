@@ -1,56 +1,71 @@
 import React, { useState } from 'react'
 import { addEvent } from "../utils";
 import MapPicker from './MapPicker';
-import './CreateEvent.css'; // Ne felejtsd el importálni a CSS-t
+import './CreateEvent.css';
 
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [preview, setPreview] = useState(null);
   const [address, setAddress] = useState("");
-  
-  // Mivel összevontuk a címet és a leírást, már csak 3 slide maradt
-  const totalSlides = 3 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Több kép kezelése
+  // images: [{ file: File, preview: string }]
+  const [images, setImages] = useState([]);
+
+  const totalSlides = 3;
 
   const handleFileChange = (e) => {
-    const selected = e.target.files[0];
-    setFile(selected);
-    if (selected) {
-      setPreview(URL.createObjectURL(selected));
-    }
-  }
+    const selected = Array.from(e.target.files);
+    if (!selected.length) return;
+
+    const newImages = selected.map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+    }));
+
+    setImages((prev) => [...prev, ...newImages]);
+
+    // input value reset, hogy ugyanazt a fájlt újra lehessen választani
+    e.target.value = "";
+  };
+
+  const removeImage = (index) => {
+    setImages((prev) => {
+      const copy = [...prev];
+      URL.revokeObjectURL(copy[index].preview);
+      copy.splice(index, 1);
+      return copy;
+    });
+  };
 
   const next = () => {
-    if (currentIndex < totalSlides - 1) {
-      setCurrentIndex(prev => prev + 1)
-    }
-  }
+    if (currentIndex < totalSlides - 1) setCurrentIndex((prev) => prev + 1);
+  };
 
   const previous = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1)
-    }
-  }
+    if (currentIndex > 0) setCurrentIndex((prev) => prev - 1);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const files = images.map((img) => img.file);
+
     const result = await addEvent(
-      { title, address, description }, 
-      file
+      { title, address, description },
+      files
     );
 
     if (result?.ok) {
       alert("Sikeres létrehozás!");
       setTitle("");
-      setLocation("");
       setDescription("");
-      setAddress("")
-      setFile(null);
-      setPreview(null);
-      setCurrentIndex(0); // Visszavisz az elejére siker esetén
+      setAddress("");
+      // preview URL-ek felszabadítása
+      images.forEach((img) => URL.revokeObjectURL(img.preview));
+      setImages([]);
+      setCurrentIndex(0);
     } else {
       alert("Hiba történt!");
     }
@@ -60,11 +75,11 @@ const CreateEvent = () => {
     <div className='createEvent'>
       <div className="slider-container">
         <form onSubmit={handleSubmit}>
-          <div 
+          <div
             className="slider"
             style={{ "--index": currentIndex }}
           >
-            {/* 1. SLIDE: Megnevezés + Leírás összevonva */}
+            {/* 1. SLIDE: Alapadatok */}
             <div className="slide">
               <h3>Alapadatok</h3>
               <input
@@ -85,46 +100,66 @@ const CreateEvent = () => {
             {/* 2. SLIDE: Helyszín */}
             <div className="slide">
               <h3>Helyszín</h3>
-              <MapPicker onAddressSelect={(val) => setAddress(val)}/>
+              <MapPicker onAddressSelect={(val) => setAddress(val)} />
             </div>
 
-            {/* 3. SLIDE: Média és Beküldés */}
+            {/* 3. SLIDE: Képek feltöltése */}
             <div className="slide">
-              <h3>Kép feltöltése</h3>
+              <h3>Képek feltöltése</h3>
+
               <input
                 type="file"
                 className="file"
                 id="file"
                 accept="image/*"
+                multiple
                 onChange={handleFileChange}
               />
-              <label htmlFor="file" className='imgUpload'>Kép kiválasztása</label>
-              
-              <div className="preview-area">
-                {preview ? (
-                  <img src={preview} alt="előnézet" className="image-preview" />
-                ) : (
-                  <div className="placeholder-preview">Nincs kép kiválasztva</div>
-                )}
-              </div>
-              
-              <button className='upload' type="submit">Esemény létrehozása</button>
-            </div>
+              <label htmlFor="file" className='imgUpload'>
+                + Kép(ek) hozzáadása
+              </label>
 
+              {images.length > 0 ? (
+                <div className="image-grid">
+                  {images.map((img, idx) => (
+                    <div key={idx} className="image-thumb-wrapper">
+                      <img
+                        src={img.preview}
+                        alt={`kép ${idx + 1}`}
+                        className="image-thumb"
+                      />
+                      <button
+                        type="button"
+                        className="remove-img-btn"
+                        onClick={() => removeImage(idx)}
+                        title="Kép eltávolítása"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="placeholder-preview">Nincs kép kiválasztva</div>
+              )}
+
+              <button className='upload' type="submit">
+                Esemény létrehozása
+              </button>
+            </div>
           </div>
 
           {/* Navigációs gombok */}
           <div className="buttons">
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={previous}
               disabled={currentIndex === 0}
             >
               Vissza
             </button>
-
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={next}
               disabled={currentIndex === totalSlides - 1}
             >
@@ -134,7 +169,7 @@ const CreateEvent = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CreateEvent;
