@@ -160,8 +160,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+    background: rgba(255, 255, 255, 0.9);  /* fehér háttér */
+    color: #111 !important;                             /* sötét nyíl */
     border: none;
     width: 45px;
     height: 45px;
@@ -170,11 +170,14 @@
     z-index: 5;
     transition: 0.3s;
     font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 .slider-btn:hover { 
-    background: #0068ca; 
+    background: #ffffff;
+    color: #0068ca;                          /* kék nyíl hoverre */
     transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 .slider-btn.prev { left: 15px; }
 .slider-btn.next { right: 15px; }
