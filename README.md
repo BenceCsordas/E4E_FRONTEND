@@ -16,4 +16,7 @@ _Miután elkészültünk a homepage designjával hozzá láttunk a backend fájl
 
 ![Reszponzív](public/Responsive.png)
 
+### 2026.02.26
+Az események helye megtekinthetővé vált mivel hozzá adtuk a google mapset a weboldalunkhoz aminek segítségével a szervező megtudja jelölni az esemény pontos helyszínét.
+![Google Maps](public/Maps.png)
 
