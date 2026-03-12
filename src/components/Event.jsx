@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { deleteEvent, readEventById, registerToEvent, unregisterFromEvent, readRegisteredEvents } from '../utils'
+import { deleteEvent, readEventById, registerToEvent, unregisterFromEvent, readRegisteredEvents, readEventRegistrations } from '../utils'
 import { useNavigate, useParams } from 'react-router'
 import { myUserContext } from '../context/MyContextProvider'
 import './Event.css'
@@ -12,6 +12,7 @@ const Event = () => {
     const [currentImgIndex, setCurrentImgIndex] = useState(0)
     const [registered, setRegistered] = useState(false)
     const [regLoading, setRegLoading] = useState(false)
+    const [regCount, setRegCount] = useState(null)
     const navigate = useNavigate()
     const { id } = useParams()
 
@@ -30,6 +31,17 @@ const Event = () => {
             setRegistered(data.events.some(e => e.id === event.id));
         });
     }, [user, event]);
+
+    // ✅ Szerverről kérdezi le a valós számot, nem lokálisan számolja
+    const fetchRegCount = async (eventId) => {
+        const data = await readEventRegistrations(eventId);
+        setRegCount(data.count);
+    };
+
+    useEffect(() => {
+        if (!event) return;
+        fetchRegCount(event.id);
+    }, [event]);
 
     const getGalleryImages = (ev) => {
         if (!ev) return [];
@@ -59,6 +71,8 @@ const Event = () => {
             await registerToEvent(event.id);
             setRegistered(true);
         }
+        // ✅ Jelentkezés/leiratkozás után szerverről kéri le a friss számot
+        await fetchRegCount(event.id);
         setRegLoading(false);
     };
 
@@ -103,6 +117,9 @@ const Event = () => {
                         <div className="info-item">
                             <span>👤</span> Szervező: {event.ownerName}
                         </div>
+                        <div className="info-item">
+                            <span>✅</span> Jelentkezők: {regCount !== null ? regCount : "..."}
+                        </div>
                     </div>
 
                     <div className="description-section">
@@ -138,7 +155,7 @@ const Event = () => {
                                 )}
                             </div>
                         ) : (
-                            <div className="gallery-empty">Nincs feltöltött kép</div>
+                            <div className="gallery-empty">Nincs feltöltött kép!</div>
                         )}
                     </div>
                 </main>
@@ -158,7 +175,6 @@ const Event = () => {
                             <button className="btn btn-sub" onClick={() => navigate("/events")}>Vissza</button>
                             {user && user.uid === event.ownerUid && (
                                 <div className="owner-actions">
-                                    {/* ✅ JAVÍTVA: navigate az edit oldalra */}
                                     <button
                                         className="btn btn-sub"
                                         onClick={() => navigate(`/event/${event.id}/edit`)}

@@ -1,26 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { myUserContext } from '../context/MyContextProvider'
 import { useNavigate } from 'react-router'
-import { readRegisteredEvents, readMyEvents } from '../utils'
+import { readRegisteredEvents, readMyEvents, readRegistrationCounts } from '../utils'
 import EventCard from './EventCard'
 
 const Profile = () => {
   const { user, logoutUser, deleteAccount } = useContext(myUserContext)
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState('registered') // 'registered' | 'mine'
+  const [activeTab, setActiveTab] = useState('registered')
   const [registeredEvents, setRegisteredEvents] = useState([])
   const [myEvents, setMyEvents] = useState([])
   const [loading, setLoading] = useState(false)
+  const [regCounts, setRegCounts] = useState({})
 
   useEffect(() => {
     if (!user) return
     setLoading(true)
     Promise.all([
       readRegisteredEvents(),
-      readMyEvents()
-    ]).then(([regData, myData]) => {
+      readMyEvents(),
+      readRegistrationCounts()
+    ]).then(([regData, myData, counts]) => {
       setRegisteredEvents(regData?.events || [])
       setMyEvents(myData?.events || [])
+      setRegCounts(counts || {})
       setLoading(false)
     })
   }, [user])
@@ -43,7 +46,6 @@ const Profile = () => {
   return (
     <div className="profile-page">
 
-      {/* Profil kártya */}
       <div className="profile-card">
         <h2 className="profile-name">{user?.displayName}</h2>
         <div className="profile-buttons">
@@ -52,7 +54,6 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Tab választó */}
       <div className="profile-tabs">
         <button
           className={`profile-tab ${activeTab === 'registered' ? 'active' : ''}`}
@@ -74,7 +75,6 @@ const Profile = () => {
         </button>
       </div>
 
-      {/* Esemény grid */}
       {loading ? (
         <div className="status">Betöltés…</div>
       ) : currentEvents.length === 0 ? (
@@ -91,6 +91,7 @@ const Profile = () => {
               ev={ev}
               isOwner={activeTab === 'mine'}
               setEvents={activeTab === 'mine' ? setMyEvents : setRegisteredEvents}
+              regCount={regCounts[ev.id] ?? 0}
             />
           ))}
         </div>
