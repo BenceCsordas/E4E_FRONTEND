@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router';
 import { deleteEvent } from '../utils';
 import "./EventCard.css"
 
-const EventCard = ({ev, isOwner, setEvents}) => {
+const EventCard = ({ev, isOwner, setEvents, regCount}) => {
     const navigate = useNavigate()
 
-    // Első kép lekérése: images tömb vagy régi imageUrl alapján
     const getFirstImage = () => {
         if (Array.isArray(ev.images) && ev.images.length > 0) {
             return ev.images[0].url;
@@ -24,12 +23,10 @@ const EventCard = ({ev, isOwner, setEvents}) => {
         navigate("/event/" + event.id)
     }
 
-    // ---- delete ----
     const handleDelete = async (ev) => {
         const ok = confirm(`Biztos törlöd? (${ev.title})`);
         if (!ok) return;
 
-        // images tömb vagy régi imageDeleteUrl
         const imagesToDelete = Array.isArray(ev.images) && ev.images.length > 0
             ? ev.images
             : (ev.imageDeleteUrl ? [{ delete_url: ev.imageDeleteUrl }] : []);
@@ -42,7 +39,6 @@ const EventCard = ({ev, isOwner, setEvents}) => {
         }
     };
 
-    // ---- edit (később) ----
     const handleEdit = (ev) => {
         console.log("Szerkesztés:", ev);
     };
@@ -51,7 +47,7 @@ const EventCard = ({ev, isOwner, setEvents}) => {
         <div className="eventCard" key={ev.id} onClick={() => loadEvent(ev)}>
             <div className="eventImageWrap">
                 {firstImage ? (
-                    <div className="eventImageContainer" >
+                    <div className="eventImageContainer">
                         <img
                             className="eventImage"
                             src={firstImage}
@@ -84,6 +80,9 @@ const EventCard = ({ev, isOwner, setEvents}) => {
                 <div className="eventFooter">
                     <div className="eventOwner">
                         Szervező: {ev.ownerName || "Ismeretlen"}
+                    </div>
+                    <div className="eventRegCount">
+                        ✅ {regCount} jelentkező
                     </div>
                 </div>
             </div>

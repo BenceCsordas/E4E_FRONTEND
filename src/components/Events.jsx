@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addEvent, readEvents, deleteEvent, readMe } from "../utils";
+import { addEvent, readEvents, deleteEvent, readMe, readRegistrationCounts } from "../utils";
 import EventCard from "./EventCard";
 
 const Events = () => {
@@ -8,12 +8,11 @@ const Events = () => {
   // data state
   const [events, setEvents] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [regCounts, setRegCounts] = useState({});
 
-  // ui state
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  // ---- betöltés ----
   useEffect(() => {
     loadAll();
   }, []);
@@ -27,6 +26,9 @@ const Events = () => {
 
     const me = await readMe();
     setCurrentUser(me || null);
+
+    const counts = await readRegistrationCounts();
+    setRegCounts(counts);
 
     setLoading(false);
   };

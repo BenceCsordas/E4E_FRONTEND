@@ -257,3 +257,12 @@ export const readEventRegistrations = async (eventId) => {
     return { count: 0, registrations: [] };
   }
 };
+export const readRegistrationCounts = async () => {
+  try {
+    const res = await backendApi.get("/events/registration-counts");
+    return res.data.counts; // { [eventId]: number }
+  } catch (error) {
+    console.log("Registration counts hiba:", error?.response?.data || error.message);
+    return {};
+  }
+};
