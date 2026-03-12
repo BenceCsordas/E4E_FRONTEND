@@ -181,6 +181,7 @@ h1 {
   transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   cursor: text;
   z-index: 0;
+  margin-top: 0px;
 }
 
 .input::placeholder {
@@ -514,12 +515,25 @@ input {
   .eventsPage {
     padding: 32px 16px !important;
   }
+  .eventsGridProfile{
+    width: 100% !important;
+    padding: 10px;
+  }
   .eventsGrid{
     justify-items: center;
-    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
   }
   .eventCard {
-    width: 288px;
+    width: 100%;
+  }
+  .profile-page{
+    padding: 40px 0px !important;
+  }
+  .profile-tab {
+    max-width: 140px;
+  }
+  .profile-card {
+    max-width: 300px;
   }
 }
 @media only screen and (max-width: 350px){
@@ -538,6 +552,11 @@ input {
 .eventsHeader {
   text-align: center;
   margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  
 }
 
 .eventsHeader h1 {
@@ -545,6 +564,12 @@ input {
 }
 
 .eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.eventsGridProfile {
+  width: 75%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
@@ -656,11 +681,10 @@ input {
 
   
 
-  font-family: "Segoe UI", sans-serif;
 }
 
 /* Glass card */
-.profile-card {
+/* .profile-card {
   width: 350px;
   padding: 40px;
   border-radius: 20px;
@@ -673,7 +697,7 @@ input {
 
   text-align: center;
   color: white;
-}
+} */
 
 /* Username */
 .profile-name {
@@ -754,10 +778,13 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: white;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  width: 310px;
 }
+
 
 /* Username */
 .profile-name {
@@ -771,6 +798,7 @@ input {
 .profile-buttons {
   display: flex;
   gap: 12px;
+  width: 100%;
 }
 
 /* Logout button */

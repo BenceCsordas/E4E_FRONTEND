@@ -49,8 +49,8 @@ const Profile = () => {
       <div className="profile-card">
         <h2 className="profile-name">{user?.displayName}</h2>
         <div className="profile-buttons">
-          <button className="delete-btn" onClick={handleDelete}>Fiók törlése</button>
-          <button className="logout-btn" onClick={logout}>Kijelentkezés</button>
+          <button className="btn btn-sub" onClick={handleDelete}>Fiók törlése</button>
+          <button className="btn btn-delete" onClick={logout}>Kijelentkezés</button>
         </div>
       </div>
 
@@ -84,7 +84,7 @@ const Profile = () => {
             : 'Még nem hoztál létre eseményt.'}
         </div>
       ) : (
-        <div className="eventsGrid">
+        <div className="eventsGridProfile eventsGrid">
           {currentEvents.map((ev) => (
             <EventCard
               key={ev.id}

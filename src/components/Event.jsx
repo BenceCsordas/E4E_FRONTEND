@@ -161,6 +161,21 @@ const Event = () => {
                 </main>
 
                 <div className="sidebar-container">
+                    
+
+                    <aside className="sidebar-card">
+                        <h3>Helyszín</h3>
+                        <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className='locationText'
+                        >
+                            {event.location}
+                        </a>
+                        <EventMap address={event.location} />
+                    </aside>
+
                     <aside className="sidebar-card">
                         <div className="button-group">
                             {user?.uid !== event.ownerUid && (
@@ -185,19 +200,6 @@ const Event = () => {
                                 </div>
                             )}
                         </div>
-                    </aside>
-
-                    <aside className="sidebar-card">
-                        <h3>Helyszín</h3>
-                        <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className='locationText'
-                        >
-                            {event.location}
-                        </a>
-                        <EventMap address={event.location} />
                     </aside>
                 </div>
             </div>
