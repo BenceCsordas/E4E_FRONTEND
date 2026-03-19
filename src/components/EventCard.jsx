@@ -79,10 +79,12 @@ const EventCard = ({ev, isOwner, setEvents, regCount}) => {
 
                 <div className="eventFooter">
                     <div className="eventOwner">
-                        Szervező: {ev.ownerName || "Ismeretlen"}
-                    </div>
-                    <div className="eventRegCount">
-                        ✅ {regCount} jelentkező
+                        <p>
+                            Szervező: {ev.ownerName || "Ismeretlen"} 
+                        </p>
+                        <p>
+                            {regCount} jelentkező
+                        </p>
                     </div>
                 </div>
             </div>

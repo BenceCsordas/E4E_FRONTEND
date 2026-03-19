@@ -89,8 +89,14 @@
 }
 
 .eventOwner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.eventOwner p {
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
 
 .eventActions {
