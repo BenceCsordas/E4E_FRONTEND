@@ -5,14 +5,31 @@
   position: relative;
   width: 100%;
   height: 100%;
-  max-height: 100%;
+  min-height: 0;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
   background: #1a3a8f;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+/* =============================
+   App.css GridContainer div override
+   – minden belső elemet nulláz, majd
+     explicit visszaállít
+   ============================= */
+.featured-wrapper,
+.featured-wrapper > *,
+.featured-wrapper * {
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+  pointer-events: auto;
 }
 
 /* =============================
@@ -21,7 +38,7 @@
 .featured-label {
   position: relative;
   z-index: 3;
-  padding: 16px 20px 0;
+  padding: 14px 20px 0;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -29,6 +46,7 @@
   color: rgba(255, 255, 255, 0.55);
   user-select: none;
   text-align: center;
+  flex-shrink: 0;
 }
 
 /* =============================
@@ -38,8 +56,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  /* Finom kék árnyalat váltás – nem tolakodó */
-  transition: opacity 0.6s ease;
+  pointer-events: none;
   background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0.15) 100%);
 }
 
@@ -52,7 +69,7 @@
   z-index: 1;
   opacity: 0.18;
   filter: blur(2px) saturate(1.4);
-  transition: opacity 0.5s ease;
+  pointer-events: none;
   border-radius: 0 !important;
 }
 
@@ -62,44 +79,39 @@
 .featured-content {
   position: relative;
   z-index: 2;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
   text-align: center;
-  padding: 10px 22px 10px;
+  padding: 8px 20px;
+  overflow: hidden;
 }
 
 .featured-content--enter {
   animation: fc-enter 0.35s ease both;
 }
-
 .featured-content--exit {
   animation: fc-exit 0.3s ease both;
 }
 
-.featured-content--idle {
-  opacity: 1;
-  transform: none;
-}
-
 @keyframes fc-enter {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fc-exit {
   from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 0; transform: translateY(-6px); }
 }
 
 /* =============================
    Title
    ============================= */
 .featured-title {
-  margin: 0 0 8px;
-  font-size: 20px;
+  margin: 0 0 6px;
+  font-size: clamp(14px, 2vw, 20px);
   font-weight: 800;
   color: #ffffff;
   line-height: 1.25;
@@ -110,32 +122,34 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-.featured-title:hover {
-  opacity: 0.8;
-}
+.featured-title:hover { opacity: 0.8; }
 
 /* =============================
    Meta (location)
    ============================= */
 .featured-meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 5px;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
   color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* =============================
    Description
    ============================= */
 .featured-desc {
-  margin: 0 0 14px;
-  font-size: 12px;
+  margin: 0 0 10px;
+  font-size: clamp(10px, 1.1vw, 12px);
   color: rgba(255, 255, 255, 0.65);
-  line-height: 1.55;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -146,37 +160,42 @@
    Footer: owner + button
    ============================= */
 .featured-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px;
   width: 100%;
+  flex-shrink: 0;
 }
 
 .featured-owner {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
   gap: 5px;
-  font-size: 11.5px;
+  font-size: clamp(10px, 1.1vw, 11.5px);
   color: rgba(255, 255, 255, 0.55);
 }
 
 .featured-btn {
   background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
   color: #fff;
-  font-size: 12px;
+  font-size: clamp(10px, 1.1vw, 12px);
   font-weight: 600;
-  padding: 6px 18px;
+  padding: 5px 16px;
   border-radius: 100px;
-  cursor: pointer;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
   white-space: nowrap;
 }
-
 .featured-btn:hover {
   background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.45) !important;
   transform: translateY(-1px);
 }
 
@@ -186,28 +205,32 @@
 .featured-nav {
   position: relative;
   z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 6px 18px 5px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  padding: 5px 18px 4px;
+  flex-shrink: 0;
 }
 
 .featured-arrow {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   background: rgba(255, 255, 255, 0.07);
   color: rgba(255, 255, 255, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
   transition: background 0.2s, color 0.2s, transform 0.15s;
   padding: 0;
+  flex-shrink: 0;
 }
-
 .featured-arrow:hover {
   background: rgba(255, 255, 255, 0.17);
   color: #fff;
@@ -218,8 +241,9 @@
    Dots
    ============================= */
 .featured-dots {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
   gap: 5px;
 }
 
@@ -229,13 +253,13 @@
   width: 6px;
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.22);
-  border: none;
+  border: none !important;
   cursor: pointer;
   transition: width 0.3s ease, background 0.3s ease;
+  flex-shrink: 0;
 }
-
 .featured-dot--active {
-  width: 20px;
+  width: 18px;
   background: rgba(255, 255, 255, 0.9);
 }
 
@@ -248,15 +272,14 @@
   height: 3px;
   background: rgba(255, 255, 255, 0.1);
   overflow: hidden;
+  flex-shrink: 0;
 }
-
 .featured-progress__bar {
   height: 100%;
   width: 0%;
   background: rgba(255, 255, 255, 0.55);
   animation: progress-run 4.5s linear forwards;
 }
-
 @keyframes progress-run {
   from { width: 0%; }
   to   { width: 100%; }
@@ -266,10 +289,9 @@
    Üres / betöltés állapot
    ============================= */
 .featured-wrapper--empty {
-  justify-content: center;
-  align-items: center;
+  justify-content: center !important;
+  align-items: center !important;
 }
-
 .featured-empty {
   flex: 1;
   display: flex;
@@ -279,7 +301,7 @@
   font-size: 13px;
 }
 
-/* Skeleton loader */
+/* Skeleton */
 .featured-skeleton {
   flex: 1;
   display: flex;
@@ -290,7 +312,6 @@
   padding: 20px;
   width: 100%;
 }
-
 .featured-skeleton__line {
   border-radius: 6px;
   background: linear-gradient(90deg,
@@ -301,107 +322,113 @@
   background-size: 200% 100%;
   animation: skeleton-shimmer 1.4s infinite;
 }
-
-.featured-skeleton__line--title {
-  width: 60%;
-  height: 20px;
-}
-
-.featured-skeleton__line--meta {
-  width: 40%;
-  height: 12px;
-}
-
-.featured-skeleton__line--desc {
-  width: 80%;
-  height: 12px;
-}
-
+.featured-skeleton__line--title { width: 60%; height: 18px; }
+.featured-skeleton__line--meta  { width: 40%; height: 11px; }
+.featured-skeleton__line--desc  { width: 80%; height: 11px; }
 @keyframes skeleton-shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
 /* =============================
-   App.css GridContainer div override
-   ============================= */
-.featured-wrapper,
-.featured-wrapper > *,
-.featured-wrapper * {
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
-  justify-content: unset;
-  align-items: unset;
-  flex-direction: unset;
-  pointer-events: auto;
-}
-
-/* Ezeket vissza kell állítani explicit */
-.featured-wrapper {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
-}
-
-.featured-content {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.featured-footer {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px;
-  width: 100%;
-}
-
-.featured-nav {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.featured-dots {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-}
-
-.featured-meta {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.featured-btn {
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  position: relative;
-  z-index: 10;
-}
-
-.featured-arrow {
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* =============================
-   div3 szülő fix (App.css-be is teheted)
+   div3 szülő fix
    ============================= */
 .div3 {
   padding: 0 !important;
   overflow: hidden !important;
+}
+
+/* =============================
+   RESZPONZÍV
+   App.css breakpoints-hoz igazítva:
+   1300px / 970px / 450px / 400px
+   ============================= */
+
+/* 1300px alatt – kisebb grid cellák (230px) */
+@media (max-width: 1300px) {
+  .featured-label {
+    padding: 10px 14px 0;
+    font-size: 10px;
+  }
+  .featured-content {
+    padding: 6px 14px;
+  }
+  .featured-nav {
+    padding: 4px 10px 3px;
+  }
+}
+
+/* 970px alatt – grid átrendeződik, div3 teljes szélesség 2 col */
+@media (max-width: 970px) {
+  .featured-title {
+    font-size: 16px;
+  }
+  .featured-desc {
+    -webkit-line-clamp: 2;
+    font-size: 11px;
+  }
+  .featured-meta {
+    font-size: 11px;
+  }
+  .featured-nav {
+    padding: 4px 10px 3px;
+    gap: 6px;
+  }
+  .featured-arrow {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* 450px alatt – kis telefon */
+@media (max-width: 450px) {
+  .featured-label {
+    padding: 7px 10px 0;
+    font-size: 9px;
+    letter-spacing: 0.07em;
+  }
+  .featured-title {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+  /* Leírás elrejtve – nincs hely */
+  .featured-desc {
+    display: none;
+  }
+  .featured-meta {
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+  .featured-owner {
+    font-size: 10px;
+  }
+  .featured-btn {
+    font-size: 10px;
+    padding: 3px 11px;
+  }
+  .featured-content {
+    padding: 5px 10px;
+    gap: 2px;
+  }
+  .featured-footer {
+    gap: 4px;
+  }
+  .featured-nav {
+    padding: 3px 8px 2px;
+    gap: 5px;
+  }
+  .featured-arrow {
+    width: 20px;
+    height: 20px;
+  }
+  .featured-dot {
+    width: 5px;
+    height: 5px;
+  }
+  .featured-dot--active {
+    width: 13px;
+  }
+  .featured-progress {
+    height: 2px;
+  }
 }

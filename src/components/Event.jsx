@@ -111,14 +111,24 @@ const Event = () => {
             <div className="event-content-wrapper">
                 <main className="main-card">
                     <div className="info-bar">
-                        <div className="info-item">
-                            <span>📍</span> {event.location || "Helyszín nincs megadva"}
-                        </div>
+                        
                         <div className="info-item">
                             <span>👤</span> Szervező: {event.ownerName}
                         </div>
                         <div className="info-item">
                             <span>✅</span> Jelentkezők: {regCount !== null ? regCount : "..."}
+                        </div>
+                        <div className="info-item">
+                            <span style={{paddingBottom:"6px"}}>📍</span>
+                            <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className='locationText'
+                        >
+                            {event.location || "Helyszín nincs megadva"}
+                        </a>
+                            
                         </div>
                     </div>
 

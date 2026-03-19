@@ -124,14 +124,10 @@ h1 {
 }
 
 .cog {
-  animation: spin 10s linear infinite;
-  transition: 2s;
+  animation: spin 20s linear infinite;
 }
 
-.div1:hover .cog {
-  transition: 2s;
-  animation-duration: 5s;
-}
+
 
 .div2 h1 {
     font-size: 1.75rem;
@@ -150,13 +146,10 @@ h1 {
 }
 
 .pencil {
-  animation: float 1.5s ease-in-out infinite;  
+  animation: float 3s ease-in-out infinite;  
 }
 
-.div2:hover .pencil {
-  transition: 2s;
-  animation-duration: 1s;
-}
+
 
 /* Kereső mező */
 .group {

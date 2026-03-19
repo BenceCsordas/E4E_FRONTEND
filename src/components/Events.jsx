@@ -69,7 +69,7 @@ const Events = () => {
         {filteredEvents.length > 0 ? (
           filteredEvents.map((ev) => {
             const isOwner = currentUser && ev.ownerUid === currentUser.id;
-            return <EventCard key={ev.id} ev={ev} isOwner={isOwner} setEvents={setEvents} />;
+            return <EventCard key={ev.id} ev={ev} isOwner={isOwner} setEvents={setEvents} regCount={regCounts[ev.id] ?? 0} />;
           })
         ) : (
           !loading && <div className="status">Nincs találat.</div>
