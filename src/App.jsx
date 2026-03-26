@@ -12,12 +12,14 @@ import PageNotFound from './components/PageNotFound'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import Event from './components/Event'
 import EditEvent from './components/EditEvent'
+import Sidebar from './components/Sidebar'
 
 function App() {
 const navigate = useNavigate()
   return (
     <div className='Main'>
-      <AiFillHome onClick={()=> navigate("/")} className='home-icon' size={40}/>
+      {/* <AiFillHome onClick={()=> navigate("/")} className='home-icon' size={40}/> */}
+      <Sidebar/>
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/events" element={<Events/>}/>
