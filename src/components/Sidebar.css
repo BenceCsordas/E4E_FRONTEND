@@ -1,0 +1,122 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 260px;
+  background-color: rgb(3, 56, 87);
+  color: white;
+  padding: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  transform: translateX(-100%); 
+  box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  background: rgba(8, 149, 192, 0.418);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  border-right: 1px solid rgba(202, 202, 202, 0.212);
+  border-top: 1px solid rgba(202, 202, 202, 0.212);
+  border-bottom: 1px solid rgba(121, 121, 121, 0.212);
+  border-left: 1px solid rgba(121, 121, 121, 0.212);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.sidebar-toggle-btn:hover {
+  background: #024357;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-top: 40px;
+}
+
+.logo { font-weight: bold; font-size: 1.2rem; }
+
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+  justify-content: space-between; 
+}
+
+.nav-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-bottom {
+  margin-top: auto; 
+  padding-bottom: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #a2a2c2;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar-nav a:hover, 
+.sidebar-nav a.active {
+  background-color: #024357; 
+  color: white;
+}
+
+.sidebar-nav a.active {
+  border-left: 4px solid rgba(8, 149, 192, 1);
+  padding-left: 8px;
+}
+
+.sidebarLogout {
+  color: #ff6b6b !important;
+}
+
+.sidebarLogout:hover {
+  background-color: rgba(255, 107, 107, 0.1) !important;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+}
+
+.main-content {
+  padding: 20px;
+  padding-top: 70px;
+  transition: margin-left 0.3s;
+}
