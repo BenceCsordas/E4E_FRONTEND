@@ -4,7 +4,6 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
 }
 
@@ -12,7 +11,7 @@
 .slider-container {
     width: 100%;
     max-width: 500px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(195, 0, 255, 0.08);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -38,17 +37,18 @@
 }
 
 .slide h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 10px;
     background: linear-gradient(to right, #ffffff, #a5b4fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 5px;
+    font-weight: 1000;
 }
 
 /* Inputok és Textarea */
-input[type="text"],
+.createEvent input[type="text"],
 textarea {
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
@@ -61,7 +61,7 @@ textarea {
     box-sizing: border-box;
 }
 
-input[type="text"]:focus,
+.createEvent input[type="text"]:focus,
 textarea:focus {
     outline: none;
     border-color: #3b82f6;
@@ -182,23 +182,24 @@ textarea {
     margin: 30px 5px 20px 5px;
 }
 
-button[type="button"] {
+.buttons [type="button"] {
     flex: 1;
     padding: 12px;
     border-radius: 12px;
     border: none;
-    background: rgba(255, 255, 255, 0.1);
     color: white;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    background: #0068ca;
 }
 
-button[type="button"]:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.2);
+.buttons button[type="button"]:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-button[type="button"]:disabled {
+.buttons button[type="button"]:disabled {
     opacity: 0.3;
     cursor: not-allowed;
     box-shadow: none !important;

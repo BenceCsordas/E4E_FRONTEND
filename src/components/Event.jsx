@@ -6,7 +6,7 @@ import './Event.css'
 import EventMap from './EventMap'
 
 const Event = () => {
-    const { user } = useContext(myUserContext)
+    const { user, setMsg } = useContext(myUserContext)
     const [event, setEvent] = useState(null)
     const [loading, setLoading] = useState(true)
     const [currentImgIndex, setCurrentImgIndex] = useState(0)
@@ -62,14 +62,19 @@ const Event = () => {
     const prevImage = () => setCurrentImgIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
 
     const handleRegister = async () => {
-        if (!user) return navigate("/signin");
+        if (!user){
+             setMsg({warning:"Jelentkezz be a jelentkezéshez!"})
+             return navigate("/signin")
+        };
         setRegLoading(true);
         if (registered) {
             await unregisterFromEvent(event.id);
             setRegistered(false);
+            setMsg({info:"Lejelentkeztél az eseményről!"})
         } else {
             await registerToEvent(event.id);
             setRegistered(true);
+            setMsg({info:"Jelentkeztél az eseményre!"})
         }
         // ✅ Jelentkezés/leiratkozás után szerverről kéri le a friss számot
         await fetchRegCount(event.id);
@@ -87,8 +92,9 @@ const Event = () => {
         const res = await deleteEvent(ev.id, imagesToDelete);
         if (res?.ok) {
             navigate("/events")
+            setMsg({success: "Sikeres törlés!"})
         } else {
-            alert("Nem sikerült törölni");
+            setMsg({err: "Nem sikerült törölni!"})
         }
     };
 

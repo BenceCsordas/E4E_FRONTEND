@@ -3,10 +3,11 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { useState } from 'react'
 import { myUserContext } from '../context/MyContextProvider'
+import { useEffect } from 'react'
 
 export const SignUp = () => {
   const navigate = useNavigate()
-  const {signUpUser,msg} = useContext(myUserContext)
+  const {signUpUser,msg, showToast} = useContext(myUserContext)
   const [loading,setLoading] = useState(false)
   const handleSubmit=async(event)=>{
     event.preventDefault()
@@ -23,6 +24,7 @@ export const SignUp = () => {
     }
     
   }
+  
   return (
     <div className='signin-up-tarolo signup-tarolo'>
       <form action="submit" onSubmit={handleSubmit}>

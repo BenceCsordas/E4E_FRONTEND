@@ -1,0 +1,139 @@
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: all;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 0.5px solid;
+    min-width: 260px;
+    max-width: 340px;
+    font-size: 14px;
+    background: #1e1e2e;
+    animation: toastSlideIn 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+.toast.removing {
+    animation: toastSlideOut 0.25s ease forwards;
+}
+
+/* Típusonkénti border szín */
+.toast-success { border-color: #3B6D11; }
+.toast-error   { border-color: #A32D2D; }
+.toast-warning { border-color: #854F0B; }
+.toast-info    { border-color: #185FA5; }
+
+/* Ikon */
+.toast-icon {
+    font-size: 14px;
+    font-style: normal;
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.toast-success .toast-icon { background: #27500A; color: #C0DD97; }
+.toast-error   .toast-icon { background: #791F1F; color: #F7C1C1; }
+.toast-warning .toast-icon { background: #633806; color: #FAC775; }
+.toast-info    .toast-icon { background: #0C447C; color: #B5D4F4; }
+
+/* Szöveg */
+.toast-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast-title {
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0 0 2px 0;
+}
+
+.toast-success .toast-title { color: #C0DD97; }
+.toast-error   .toast-title { color: #F7C1C1; }
+.toast-warning .toast-title { color: #FAC775; }
+.toast-info    .toast-title { color: #B5D4F4; }
+
+.toast-msg {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Progress bar */
+.toast-progress {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 8px;
+    width: 100%;
+    animation: toastProgress linear forwards;
+}
+
+.toast-success .toast-progress { background: #639922; }
+.toast-error   .toast-progress { background: #E24B4A; }
+.toast-warning .toast-progress { background: #EF9F27; }
+.toast-info    .toast-progress { background: #378ADD; }
+
+/* Bezáró gomb */
+.toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+.toast-close:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Animációk */
+@keyframes toastSlideIn {
+    from { transform: translateX(110%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes toastSlideOut {
+    to { transform: translateX(110%); opacity: 0; }
+}
+
+@keyframes toastProgress {
+    from { width: 100%; }
+    to   { width: 0%; }
+}
+
+/* Mobilon alulra igazítva */
+@media (max-width: 480px) {
+    .toast-container {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+    }
+
+    .toast {
+        max-width: 100%;
+    }
+}

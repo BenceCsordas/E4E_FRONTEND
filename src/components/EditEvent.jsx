@@ -5,7 +5,7 @@ import { readEventById, updateEvent } from '../utils'
 import './EditEvent.css'
 
 const EditEvent = () => {
-    const { user } = useContext(myUserContext)
+    const { user, setMsg } = useContext(myUserContext)
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -102,7 +102,9 @@ const EditEvent = () => {
 
         if (res?.ok) {
             navigate(`/event/${id}`)
+            setMsg({success: "Sikeres szerkesztés!"})
         } else {
+            setMsg({err: "Nem sikerült menteni. Próbáld újra!"})
             setError('Nem sikerült menteni. Próbáld újra!')
         }
     }
@@ -231,20 +233,21 @@ const EditEvent = () => {
                     <div className="edit-actions">
                         <button
                             type="button"
-                            onClick={handleSubmit}
-                            disabled={saving}
-                            className="btn btn-sub"
-                        >
-                            {saving ? 'Mentés...' : 'Mentés'}
-                        </button>
-                        <button
-                            type="button"
                             onClick={() => navigate(`/event/${id}`)}
                             className="btn btn-sub"
                             disabled={saving}
                         >
                             Mégse
                         </button>
+                        <button
+                            type="button"
+                            onClick={handleSubmit}
+                            disabled={saving}
+                            className="btn btn-save"
+                        >
+                            {saving ? 'Mentés...' : 'Mentés'}
+                        </button>
+                        
                     </div>
                 </main>
             </div>
