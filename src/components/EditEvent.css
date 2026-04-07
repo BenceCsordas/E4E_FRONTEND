@@ -1,7 +1,5 @@
-/* ================================
-   EditEvent.css
-   Illeszkedik az Event.css stílushoz
-   ================================ */
+
+
 
 /* Hibaüzenet */
 .edit-error {
@@ -117,6 +115,7 @@
   padding: 0 !important;
   line-height: 1;
   transition: background 0.2s, transform 0.15s;
+  border: 1px solid rgb(53, 53, 53);
 }
 
 .edit-thumb-remove:hover {
@@ -180,4 +179,5 @@
 .edit-main-card {
   max-width: 700px;
   width: 100%;
+  background: rgba(195, 0, 255, 0.08);
 }

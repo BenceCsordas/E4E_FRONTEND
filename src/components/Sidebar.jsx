@@ -27,9 +27,9 @@ const Sidebar = () => {
       </button>
 
       <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
-        <div className="sidebar-header">
+        {/* <div className="sidebar-header">
           <span className="logo">Events4Everyone</span>
-        </div>
+        </div> */}
         
         <nav className="sidebar-nav">
           <div className="nav-top">

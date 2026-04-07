@@ -4,12 +4,13 @@ import { Navigate } from 'react-router';
 import { myUserContext } from '../context/MyContextProvider';
 
 export const ProtectedRoute = ({children}) => {
-  
-    const {user} = useContext(myUserContext)
+  const {user, loading} = useContext(myUserContext)
 
-    if(!user) {
-        return <Navigate to="/signin" replace/>
-    }
-  
-    return children;
+  if (loading) return <div>Betöltés...</div> 
+
+  if (!user) {
+    return <Navigate to="/signin" replace/>
+  }
+
+  return children;
 };

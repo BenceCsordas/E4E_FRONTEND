@@ -5,7 +5,7 @@ import { readRegisteredEvents, readMyEvents, readRegistrationCounts } from '../u
 import EventCard from './EventCard'
 
 const Profile = () => {
-  const { user, logoutUser, deleteAccount } = useContext(myUserContext)
+  const { user, logoutUser, deleteAccount, msg, showToast } = useContext(myUserContext)
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('registered')
   const [registeredEvents, setRegisteredEvents] = useState([])
@@ -37,6 +37,7 @@ const Profile = () => {
     if (window.confirm("Biztosan törölni akarja fiókját?")) {
       const pw = prompt("Add meg a jelszavad a fiók törléséhez: ")
       await deleteAccount(pw)
+       
       navigate("/")
     }
   }
@@ -49,8 +50,8 @@ const Profile = () => {
       <div className="profile-card">
         <h2 className="profile-name">{user?.displayName}</h2>
         <div className="profile-buttons">
-          <button className="btn btn-sub" onClick={handleDelete}>Fiók törlése</button>
-          <button className="btn btn-delete" onClick={logout}>Kijelentkezés</button>
+          <button className="btn btn-sub" onClick={logout}>Kijelentkezés</button>
+          <button className="btn btn-delete" onClick={handleDelete}>Fiók törlése</button>
         </div>
       </div>
 

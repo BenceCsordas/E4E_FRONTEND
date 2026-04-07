@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import { addEvent } from "../utils";
 import MapPicker from './MapPicker';
 import './CreateEvent.css';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router'
+import { myUserContext } from '../context/MyContextProvider';
 
 const CreateEvent = () => {
+  const {setMsg} = useContext(myUserContext)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const navigate = useNavigate()
   // Több kép kezelése
   // images: [{ file: File, preview: string }]
   const [images, setImages] = useState([]);
@@ -58,7 +62,8 @@ const CreateEvent = () => {
     );
 
     if (result?.ok) {
-      alert("Sikeres létrehozás!");
+      setMsg({success:"Sikeresen létrehoztad az eseményed: " + title})
+
       setTitle("");
       setDescription("");
       setAddress("");
@@ -66,8 +71,9 @@ const CreateEvent = () => {
       images.forEach((img) => URL.revokeObjectURL(img.preview));
       setImages([]);
       setCurrentIndex(0);
+      navigate("/profile")
     } else {
-      alert("Hiba történt!");
+      setMsg({err:"Hiba történt az esemény létrehozásakor"})
     }
   };
 
