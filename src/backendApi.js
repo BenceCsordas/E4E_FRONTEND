@@ -1,9 +1,14 @@
 import axios from "axios";
-import { auth } from "./firebaseApp"; // ⚠️ nálad ez a fájl neve lehet más, igazítsd
+import { auth } from "./firebaseApp";
+
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
 export const backendApi = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: isLocalhost 
+    ? "http://localhost:8000" 
+    : (import.meta.env.VITE_API_URL || "https://e4ebackend-mxucmv522-bences-projects-f01cf011.vercel.app"),
 });
+
 backendApi.interceptors.request.use(
   async (config) => {
     const user = auth.currentUser;
