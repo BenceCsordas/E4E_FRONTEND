@@ -13,8 +13,6 @@ const CreateEvent = () => {
   const [address, setAddress] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate()
-  // Több kép kezelése
-  // images: [{ file: File, preview: string }]
   const [images, setImages] = useState([]);
 
   const totalSlides = 3;
@@ -29,8 +27,6 @@ const CreateEvent = () => {
     }));
 
     setImages((prev) => [...prev, ...newImages]);
-
-    // input value reset, hogy ugyanazt a fájlt újra lehessen választani
     e.target.value = "";
   };
 
@@ -44,6 +40,15 @@ const CreateEvent = () => {
   };
 
   const next = () => {
+    if (currentIndex === 0) {
+      if (!title.trim()) { setMsg({ warning: "A cím megadása kötelező!" }); return; }
+      if (!description.trim()) { setMsg({ warning: "A leírás megadása kötelező!" }); return; }
+    }
+
+    if (currentIndex === 1) {
+      if (!address.trim()) { setMsg({ warning: "A helyszín megadása kötelező!" }); return; }
+    }
+
     if (currentIndex < totalSlides - 1) setCurrentIndex((prev) => prev + 1);
   };
 
@@ -54,6 +59,10 @@ const CreateEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title.trim()) { setMsg({ warning: "A cím megadása kötelező!" }); setCurrentIndex(0); return; }
+    if (!description.trim()) { setMsg({ warning: "A leírás megadása kötelező!" }); setCurrentIndex(0); return; }
+    if (!address.trim()) { setMsg({ warning: "A helyszín megadása kötelező!" }); setCurrentIndex(1); return; }
+
     const files = images.map((img) => img.file);
 
     const result = await addEvent(
@@ -62,18 +71,16 @@ const CreateEvent = () => {
     );
 
     if (result?.ok) {
-      setMsg({success:"Sikeresen létrehoztad az eseményed: " + title})
-
+      setMsg({ success: "Sikeresen létrehoztad az eseményed: " + title })
       setTitle("");
       setDescription("");
       setAddress("");
-      // preview URL-ek felszabadítása
       images.forEach((img) => URL.revokeObjectURL(img.preview));
       setImages([]);
       setCurrentIndex(0);
       navigate("/profile")
     } else {
-      setMsg({err:"Hiba történt az esemény létrehozásakor"})
+      setMsg({ err: "Hiba történt az esemény létrehozásakor" })
     }
   };
 
@@ -85,7 +92,6 @@ const CreateEvent = () => {
             className="slider"
             style={{ "--index": currentIndex }}
           >
-            {/* 1. SLIDE: Alapadatok */}
             <div className="slide">
               <h3>Alapadatok</h3>
               <input
@@ -93,23 +99,19 @@ const CreateEvent = () => {
                 placeholder="Esemény címe"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                required
               />
               <textarea
                 placeholder="Esemény rövid leírása..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
               />
             </div>
 
-            {/* 2. SLIDE: Helyszín */}
             <div className="slide">
               <h3>Helyszín</h3>
               <MapPicker onAddressSelect={(val) => setAddress(val)} />
             </div>
 
-            {/* 3. SLIDE: Képek feltöltése */}
             <div className="slide">
               <h3>Képek feltöltése</h3>
 
@@ -155,7 +157,6 @@ const CreateEvent = () => {
             </div>
           </div>
 
-          {/* Navigációs gombok */}
           <div className="buttons">
             <button
               type="button"

@@ -10,13 +10,17 @@ export function ToastContainer() {
   const {msg, setMsg, toasts, removeToast, showToast } = useContext(myUserContext)
   const navigate = useNavigate()
   useEffect(()=>{
+    // showToast("success", "Teszt!", "Success teszt.")
+    // showToast("error", "Teszt!", "Error teszt.")
+    // showToast("warning", "Teszt!", "Warining teszt.")
+    // showToast("info", "Teszt!", "Info teszt.")
     if(msg && msg?.signIn) { 
          navigate('/') 
          showToast("success", "Siker!", "Sikeresen bejelentkeztél.")
-         setMsg({})
+         setMsg(null)
         }if(msg && msg?.err){
           showToast("error", "Hiba!", msg.err)
-          setMsg({})
+          setMsg(null)
         }
         else if(msg && msg?.info) { 
          showToast("info", "Infó!", msg.info) 
