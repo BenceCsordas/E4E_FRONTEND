@@ -76,7 +76,6 @@ const Event = () => {
             setRegistered(true);
             setMsg({info:"Jelentkeztél az eseményre!"})
         }
-        // ✅ Jelentkezés/leiratkozás után szerverről kéri le a friss számot
         await fetchRegCount(event.id);
         setRegLoading(false);
     };

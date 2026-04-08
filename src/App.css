@@ -5,12 +5,10 @@
     font-weight: bold;
     color: white;
 }
-.cog {
-  font-size: 120px;
+.cog, .pencil {
+  font-size: 170px;
   }
-  .pencil {
-    font-size: 120px;
-  }
+  
 .Main {
     min-height: 100vh;
     background-image: url("assets/bg1.jpg");
@@ -107,7 +105,7 @@ h1 {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("assets/test.gif");
+  background-image: url("logoPlaceHolder.gif");
   background-size: cover;
   opacity: 0.1;
   transition: opacity 0.5s ease;
@@ -426,12 +424,18 @@ input {
   box-shadow: 0 5px 15px rgba(119, 0, 254, 0.5) !important;
 }
 @media only screen and (max-width: 1300px){
+  .cog, .pencil {
+    font-size: 150px;
+  }
   .GridContainer{
     grid-template-columns: repeat(4, 230px);
     grid-template-rows: repeat(2, 230px);
   }
 }
 @media only screen and (max-width: 970px){
+  .cog, .pencil {
+    font-size: 120px;
+  }
   .div1{
       grid-area: doboz1;
   }
@@ -463,10 +467,10 @@ input {
 }
 @media only screen and (max-width: 450px){
   .cog {
-  font-size: 60px;
+  font-size: 90px;
   }
   .pencil {
-    font-size: 60px;
+    font-size: 90px;
   }
   .div1{
       grid-area: doboz1;

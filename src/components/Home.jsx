@@ -16,15 +16,15 @@ const Home = () => {
         <div className='GridContainer'>
             {user ?<div className="div1 gdiv"  onClick={()=>navigate("/profile")}>
                 <h1>Profilom</h1>  
-                <FaCog size={150} className='cog'/>
+                <FaCog  className='cog'/>
             </div>:<div className="div1 gdiv"  onClick={()=>navigate("/signin")}>
                 <h1>Bejelentkezés</h1>  
-                <FaCog size={150} className='cog'/>
+                <FaCog  className='cog'/>
             </div>}
             
             <div className="div2 gdiv"  onClick={()=>navigate("/create_event")}> 
                 <h1>Esemény létrehozása</h1>
-                <RiPencilFill size={150} className='pencil'/>
+                <RiPencilFill  className='pencil'/>
             </div>
             
             <div className="div3 gdiv" >
@@ -36,7 +36,7 @@ const Home = () => {
             <div className="div4 gdiv" onClick={()=>navigate("/events")}> 
 
                 <h1>Események</h1>
-                {/* <img src="../public/test.gif" alt="asd" style={{backgroundColor:"red"}}/> */}
+               
             </div>
         </div>
     </div>
