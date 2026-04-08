@@ -3,7 +3,7 @@
     margin: 0;
     font-family: aleo;
     font-weight: bold;
-    color: white;
+    
 }
 .cog, .pencil {
   font-size: 170px;
@@ -78,7 +78,7 @@ h1 {
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-
+    color: white;
 }
 .GridContainer  .gdiv:hover {
     transition: 0.2s;
@@ -553,6 +553,7 @@ input {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  color: white;
   
 }
 
