@@ -6,7 +6,7 @@ const isLocalhost = window.location.hostname === "localhost" || window.location.
 export const backendApi = axios.create({
   baseURL: isLocalhost 
     ? "http://localhost:8000" 
-    : (import.meta.env.VITE_API_URL || "https://e4ebackend-mxucmv522-bences-projects-f01cf011.vercel.app"),
+    : (import.meta.env.VITE_API_URL || "https://e4ebackend.vercel.app"),
 });
 
 backendApi.interceptors.request.use(
