@@ -266,6 +266,9 @@ h1 {
   height: 100%;
   position: relative;
 }
+.signin-up-tarolo div a {
+  color: white;
+}
 .gomb {
   padding: 14px;
     border: none;
