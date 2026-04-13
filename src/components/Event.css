@@ -117,6 +117,9 @@
     text-align: justify;
     overflow-wrap: break-word;
 }
+.description-text p {
+    white-space: pre-line;
+}
 
 /* --- Galéria Szekció a Leírás alatt --- */
 .gallery-section {
@@ -308,4 +311,43 @@
     .mini-slider {
         height: 250px;
     }
+}
+
+.floating-add-btn {
+  position: fixed;
+  bottom: 30px; /* Távolság az aljától */
+  right: 30px;  /* Távolság a jobb szélétől */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #4b0977a4; /* Válassz az oldaladhoz illő színt */
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, background-color 0.2s;
+  z-index: 1000; /* Legyen minden felett */
+}
+
+.floating-add-btn:hover {
+  background-color: #4b0977;
+  /* Kézzel adjuk hozzá a nagyítást ÉS az animációt */
+  transform: scale(1.1); 
+  animation: spin 0.35s ease-in-out ;
+}
+
+@keyframes spin {
+  from {
+    transform: scale(1.1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.1) rotate(180deg);
+  }
+}
+
+.floating-add-btn:active {
+  transform: scale(0.95);
 }

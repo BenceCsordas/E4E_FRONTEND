@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { addEvent, readEvents, deleteEvent, readMe, readRegistrationCounts } from "../utils";
+import {  readEvents,  readMe, readRegistrationCounts } from "../utils";
 import EventCard from "./EventCard";
+import { useNavigate } from "react-router";
 
 const Events = () => {
   const [searched, setSearched] = useState("")
-  
+  const navigate = useNavigate();
   // data state
   const [events, setEvents] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -75,6 +76,15 @@ const Events = () => {
           !loading && <div className="status">Nincs találat.</div>
         )}
       </div>
+      <button 
+        className="floating-add-btn" 
+        onClick={() => navigate("/create_event")}
+        title="Új esemény hozzáadása"
+      >
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="white">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        </svg>
+      </button>
     </div>
   );
 };

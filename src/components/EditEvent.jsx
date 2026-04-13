@@ -18,6 +18,8 @@ const EditEvent = () => {
     const [title, setTitle] = useState('')
     const [location, setLocation] = useState('')
     const [description, setDescription] = useState('')
+    const [date, setDate] = useState('')
+    const [time, setTime] = useState('')
 
     // Images
     const [existingImages, setExistingImages] = useState([])
@@ -34,6 +36,8 @@ const EditEvent = () => {
                 setTitle(data.title || '')
                 setLocation(data.location || '')
                 setDescription(data.description || '')
+                setDate(data.date ? data.date.replace(/\./g, '-') : '')
+                setTime(data.time || '')
 
                 if (Array.isArray(data.images) && data.images.length > 0) {
                     setExistingImages(data.images)
@@ -90,11 +94,13 @@ const EditEvent = () => {
         setError(null)
 
         const updateData = {
-            title,
-            location,
-            description,
-            images: existingImages,
-        }
+                title,
+                location,
+                description,
+                images: existingImages,
+                date: date ? date.replace(/-/g, '.') : null,
+                time: time || null,
+            }
 
         const res = await updateEvent(id, updateData, newFiles, removedImages)
 
@@ -153,7 +159,26 @@ const EditEvent = () => {
                             className="edit-input"
                         />
                     </div>
-
+                    <div className="edit-field edit-date-time-row">
+                        <div className="edit-date-time-field">
+                            <label className="edit-label">Dátum</label>
+                            <input
+                                type="date"
+                                value={date}
+                                onChange={e => setDate(e.target.value)}
+                                className="edit-input edit-date-input"
+                            />
+                        </div>
+                        <div className="edit-date-time-field">
+                            <label className="edit-label">Időpont</label>
+                            <input
+                                type="time"
+                                value={time}
+                                onChange={e => setTime(e.target.value)}
+                                className="edit-input edit-time-input"
+                            />
+                        </div>
+                    </div>
                     {/* Leírás */}
                     <div className="edit-field">
                         <label className="edit-label">Leírás</label>
