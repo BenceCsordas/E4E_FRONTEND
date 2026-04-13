@@ -181,3 +181,40 @@
   width: 100%;
   background: rgba(195, 0, 255, 0.08);
 }
+/* Dátum és idő sor */
+.edit-date-time-row {
+    display: flex;
+    gap: 12px;
+}
+
+.edit-date-time-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fehér szöveg és ikon a date/time inputoknál */
+.edit-date-input,
+.edit-time-input {
+    color: white;
+}
+
+.edit-date-input::-webkit-calendar-picker-indicator,
+.edit-time-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.edit-date-input::-webkit-calendar-picker-indicator:hover,
+.edit-time-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+@media (max-width: 480px) {
+    .edit-date-time-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

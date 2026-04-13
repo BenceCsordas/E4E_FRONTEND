@@ -168,11 +168,13 @@ export const addEvent = async (eventData, files = []) => {
     const images = await uploadImages(files);
 
     const res = await backendApi.post("/events", {
-      title: eventData.title,
-      location: eventData.address,
-      description: eventData.description,
-      images, // [{ url, delete_url }, ...]
-    });
+        title: eventData.title,
+        location: eventData.address,
+        description: eventData.description,
+        images,
+        date: eventData.date || null,
+        time: eventData.time || null,
+});
 
     return res.data;
   } catch (error) {
@@ -199,11 +201,13 @@ export const updateEvent = async (id, updateData, newFiles = [], removedImages =
     const allImages = [...existingImages, ...uploadedImages];
 
     const res = await backendApi.put(`/events/${id}`, {
-      title: updateData.title,
-      location: updateData.location,
-      description: updateData.description,
-      images: allImages,
-    });
+  title: updateData.title,
+  location: updateData.location,
+  description: updateData.description,
+  images: allImages,
+  date: updateData.date || null,   
+  time: updateData.time || null,   
+});
 
     return res.data;
   } catch (error) {

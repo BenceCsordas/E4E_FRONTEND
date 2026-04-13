@@ -244,3 +244,61 @@ textarea {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+.date-time-row {
+    display: flex;
+    gap: 12px;
+}
+
+.date-time-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    padding-left: 4px;
+    letter-spacing: 0.04em;
+}
+
+.date-input,
+.time-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: white !important;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+.date-input::-webkit-calendar-picker-indicator,
+.time-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.date-input::-webkit-calendar-picker-indicator:hover,
+.time-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.date-input:focus,
+.time-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+@media (max-width: 480px) {
+    .date-time-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

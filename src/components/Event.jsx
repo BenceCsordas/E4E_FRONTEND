@@ -124,6 +124,9 @@ const Event = () => {
                             <span>✅</span> Jelentkezők: {regCount !== null ? regCount : "..."}
                         </div>
                         <div className="info-item">
+                             <span>📆</span> Időpont: {event.date} | {event.time}
+                        </div>
+                        <div className="info-item">
                             <span style={{paddingBottom:"6px"}}>📍</span>
                             <a
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
@@ -140,8 +143,9 @@ const Event = () => {
                     <div className="description-section">
                         <h3>Esemény leírása</h3>
                         <div className="description-text">
-                            {event.description}
+                            <p>{event.description}</p>
                         </div>
+                        
                     </div>
 
                     <div className="gallery-section">
