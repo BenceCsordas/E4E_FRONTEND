@@ -503,6 +503,14 @@ input {
         "doboz1 doboz2"
     ;
   }
+  .profile-tabs{
+    flex-direction: column;
+    width: 100%;
+    
+  }
+  .profile-tab {
+    width: 100%;
+  }
 }
 @media only screen and (max-width: 400px){
   .slider-container{
@@ -527,14 +535,13 @@ input {
     width: 100%;
   }
   .profile-page{
-    padding: 40px 0px !important;
+    padding: 40px 10px !important;
   }
-  .profile-tab {
-    max-width: 140px;
-  }
+  
   .profile-card {
     max-width: 300px;
   }
+  
 }
 @media only screen and (max-width: 350px){
   .eventsPage {
@@ -875,7 +882,7 @@ input {
 }
 
 .tab-badge {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #280192 0%, #c73bff 100%);
   color: white;
   font-size: 0.75rem;
   padding: 2px 8px;
@@ -896,3 +903,29 @@ input {
 .pac-matched {
   color: black !important;
 }
+
+.profile-admin-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(59,130,246,0.25));
+  border: 1px solid rgba(168,85,247,0.4);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #c084fc;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+ 
+.profile-tab-admin {
+  background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(59,130,246,0.12)) !important;
+  border-color: rgba(168,85,247,0.3) !important;
+}
+ 
+.profile-tab-admin.active {
+  background: linear-gradient(135deg, rgba(168,85,247,0.3), rgba(59,130,246,0.3)) !important;
+  border-color: rgba(168,85,247,0.7) !important;
+  color: #c084fc !important;
+}
+ 

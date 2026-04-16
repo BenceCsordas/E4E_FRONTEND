@@ -270,3 +270,77 @@ export const readRegistrationCounts = async () => {
     return {};
   }
 };
+
+// ---------------------------
+// ADMIN API FÜGGVÉNYEK
+// Másold be a utils.js végére
+// ---------------------------
+
+// Az összes user lekérése (admin only)
+export const adminReadUsers = async () => {
+  try {
+    const res = await backendApi.get("/admin/users");
+    return res.data; // { count, users: [{ uid, name, email, isAdmin, createdAt }] }
+  } catch (error) {
+    console.log("Admin users read hiba:", error?.response?.data || error.message);
+    return { count: 0, users: [] };
+  }
+};
+
+// User adatainak módosítása (név, isAdmin)
+export const adminUpdateUser = async (uid, data) => {
+  try {
+    const res = await backendApi.put(`/admin/users/${uid}`, data);
+    return res.data; // { ok }
+  } catch (error) {
+    console.log("Admin user update hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// User törlése
+export const adminDeleteUser = async (uid) => {
+  try {
+    const res = await backendApi.delete(`/admin/users/${uid}`);
+    return res.data; // { ok }
+  } catch (error) {
+    console.log("Admin user delete hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// Értesítő email küldése egy usernek
+export const adminSendEmail = async (uid, { subject, message }) => {
+  try {
+    const res = await backendApi.post(`/admin/users/${uid}/email`, { subject, message });
+    return res.data; // { ok }
+  } catch (error) {
+    console.log("Admin email küldés hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// Admin statisztikák
+export const adminReadStats = async () => {
+  try {
+    const res = await backendApi.get("/admin/stats");
+    return res.data; // { totalUsers, totalEvents, totalRegistrations, recentEvents }
+  } catch (error) {
+    console.log("Admin stats hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// Összes esemény lekérése adminnak (nagyobb limit)
+export const adminReadAllEvents = async (limit = 200) => {
+  try {
+    const res = await backendApi.get("/events", { params: { limit } });
+    return res.data;
+  } catch (error) {
+    console.log("Admin events read hiba:", error?.response?.data || error.message);
+    return { count: 0, events: [] };
+  }
+};
+
+// Esemény regisztrációinak lekérése (már létezik: readEventRegistrations)
+// Újraexportálva itt az admin számára, nincs változás
