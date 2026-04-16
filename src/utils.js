@@ -107,9 +107,10 @@ export const readMe = async () => {
   }
 };
 
-export const updateMe = async ({ name }) => {
+export const updateMe = async (userData) => { 
   try {
-    const res = await backendApi.put("/users/me", { name });
+    
+    const res = await backendApi.put("/users/me", userData); 
     return res.data;
   } catch (error) {
     console.log("Me update hiba:", error?.response?.data || error.message);
@@ -270,3 +271,114 @@ export const readRegistrationCounts = async () => {
     return {};
   }
 };
+
+// ---------------------------
+// ADMIN API FÜGGVÉNYEK
+// Másold be a utils.js végére
+// ---------------------------
+
+// Az összes user lekérése (admin only)
+export const adminReadUsers = async () => {
+  try {
+    const res = await backendApi.get("/admin/users");
+    return res.data; // { count, users: [{ uid, name, email, isAdmin, createdAt }] }
+  } catch (error) {
+    console.log("Admin users read hiba:", error?.response?.data || error.message);
+    return { count: 0, users: [] };
+  }
+};
+
+// User adatainak módosítása (név, isAdmin)
+export const adminUpdateUser = async (uid, data) => {
+  try {
+    const res = await backendApi.put(`/admin/users/${uid}`, data);
+    return res.data; // { ok }
+  } catch (error) {
+    console.log("Admin user update hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// User törlése
+export const adminDeleteUser = async (uid) => {
+  try {
+    const res = await backendApi.delete(`/admin/users/${uid}`);
+    return res.data; // { ok }
+  } catch (error) {
+    console.log("Admin user delete hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// Értesítő email küldése egy usernek
+export const adminSendEmail = async (uid, { subject, message }) => {
+  try {
+    const res = await backendApi.post(`/admin/users/${uid}/email`, { subject, message });
+    return res.data; // { ok }
+  } catch (error) {
+    console.log("Admin email küldés hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// Admin statisztikák
+export const adminReadStats = async () => {
+  try {
+    const res = await backendApi.get("/admin/stats");
+    return res.data; // { totalUsers, totalEvents, totalRegistrations, recentEvents }
+  } catch (error) {
+    console.log("Admin stats hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+
+// Összes esemény lekérése adminnak (nagyobb limit)
+export const adminReadAllEvents = async (limit = 200) => {
+  try {
+    const res = await backendApi.get("/events", { params: { limit } });
+    return res.data;
+  } catch (error) {
+    console.log("Admin events read hiba:", error?.response?.data || error.message);
+    return { count: 0, events: [] };
+  }
+};
+
+// Esemény regisztrációinak lekérése (már létezik: readEventRegistrations)
+// Újraexportálva itt az admin számára, nincs változás
+
+
+const convertToBase64 = (file) => {
+    return new Promise((resolve, reject)=>{
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = (error) => reject(error)//ha nem sikerül beolvasni ez hívódik meg.
+    })
+}
+
+
+//feltöltés
+export const uploadProfileImage = async (file) => {
+    try {
+        const compressed = await imageCompression(file, { maxSizeMB: 1, useWebWorker: true, maxWidthOrHeight: 800 });
+        const base64 = await convertToBase64(compressed);
+        const resp = await backendApi.post("/api/uploadProfile", { image: base64 });
+        return resp.data; // { url, public_id }
+    } catch (error) {
+        console.log("Upload failed: ", error);
+        return null;
+    }
+};
+
+//törlés, ha ismerjük a public_id-t
+export const deleteProfileImage = async (public_id) => {
+    console.log(public_id)
+    try {
+        const resp = await axios.post(API_URL + "deleteImage", {public_id})
+        console.log(resp.data)
+        return resp.data
+    } catch (error) {
+        console.log("A fotó törlése a Cloudinary-ról nem sikerült: ", error)
+    }
+
+}
