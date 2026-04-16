@@ -398,9 +398,12 @@ const AdminPanel = ({ onEditEvent }) => {
               </td>
               <td className="adm-muted-cell">{u.email || '—'}</td>
               <td className="adm-muted-cell">
-                {u.createdAt?.seconds
-                  ? new Date(u.createdAt.seconds * 1000).toLocaleDateString('hu-HU')
-                  : '—'}
+                {u.createdAt 
+                    ? (u.createdAt.toDate 
+                        ? u.createdAt.toDate().toLocaleDateString('hu-HU') // Ha Firebase Timestamp objektum
+                        : new Date((u.createdAt.seconds || u.createdAt._seconds) * 1000).toLocaleDateString('hu-HU') // Ha JSON-ná alakított adat
+                      )
+                : '—'}
               </td>
               <td>
                 <span className={`adm-badge ${u.isAdmin ? 'adm-badge-admin' : 'adm-badge-user'}`}>
