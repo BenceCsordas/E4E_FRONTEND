@@ -358,79 +358,87 @@ const AdminPanel = ({ onEditEvent }) => {
 
       {/* ══ USERS ══════════════════════════════════════════════════════════ */}
       {!loading && section === 'users' && (
-        <>
-          <div className="adm-toolbar">
-            <input
-              className="adm-search"
-              placeholder="🔍 Keresés név, email..."
-              value={userSearch}
-              onChange={(e) => setUserSearch(e.target.value)}
-            />
-            <span className="adm-count">{filteredUsers.length} felhasználó</span>
-          </div>
-          <div className="adm-table-wrap">
-            <table className="adm-table">
-              <thead>
-                <tr>
-                  <th>Név</th>
-                  <th>Email</th>
-                  <th>Regisztráció</th>
-                  <th>Jogosultság</th>
-                  <th>Műveletek</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredUsers.length === 0 ? (
-                  <tr><td colSpan={5} className="adm-empty">Nincs találat.</td></tr>
-                ) : filteredUsers.map((u) => (
-                  <tr key={u.uid} className="adm-tr">
-                    <td className="adm-td-name">
-                      <div className="adm-avatar">{(u.name || '?')[0].toUpperCase()}</div>
-                      <span>{u.name || '—'}</span>
-                    </td>
-                    <td className="adm-muted-cell">{u.email || '—'}</td>
-                    <td className="adm-muted-cell">
-                      {u.createdAt?.seconds
-                        ? new Date(u.createdAt.seconds * 1000).toLocaleDateString('hu-HU')
-                        : '—'}
-                    </td>
-                    <td>
-                      <span className={`adm-badge ${u.isAdmin ? 'adm-badge-admin' : 'adm-badge-user'}`}>
-                        {u.isAdmin ? 'Admin' : 'User'}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="adm-actions">
-                        <button
-                          className="adm-action-btn adm-action-email"
-                          title="Email küldése"
-                          onClick={() => setEmailTarget(u)}
-                        >
-                          📧
-                        </button>
-                        <button
-                          className="adm-action-btn adm-action-edit"
-                          title="Szerkesztés"
-                          onClick={() => setRenameTarget(u)}
-                        >
-                          ✏️
-                        </button>
-                        <button
-                          className="adm-action-btn adm-action-del"
-                          title="Törlés"
-                          onClick={() => setConfirmDelete({ type: 'user', item: u })}
-                        >
-                          🗑️
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
+  <>
+    <div className="adm-toolbar">
+      <input
+        className="adm-search"
+        placeholder="🔍 Keresés név, email..."
+        value={userSearch}
+        onChange={(e) => setUserSearch(e.target.value)}
+      />
+      <span className="adm-count">{filteredUsers.length} felhasználó</span>
+    </div>
+    <div className="adm-table-wrap">
+      <table className="adm-table">
+        <thead>
+          <tr>
+            <th>Név</th>
+            <th>Email</th>
+            <th>Regisztráció</th>
+            <th>Jogosultság</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredUsers.length === 0 ? (
+            <tr><td colSpan={5} className="adm-empty">Nincs találat.</td></tr>
+          ) : filteredUsers.map((u) => (
+            <tr key={u.uid} className="adm-tr">
+              <td className="adm-td-name">
+                {/* ── Itt történt a módosítás: avatár megjelenítése ── */}
+                <div className="adm-avatar">
+                  <img 
+                    src={u.photoURL || 'https://placehold.net/avatar.svg'} 
+                    alt={u.name || 'User'} 
+                    onError={(e) => { e.target.src = 'https://placehold.net/avatar.svg'; }}
+                    style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+                  />
+                </div>
+                <span>{u.name || '—'}</span>
+              </td>
+              <td className="adm-muted-cell">{u.email || '—'}</td>
+              <td className="adm-muted-cell">
+                {u.createdAt?.seconds
+                  ? new Date(u.createdAt.seconds * 1000).toLocaleDateString('hu-HU')
+                  : '—'}
+              </td>
+              <td>
+                <span className={`adm-badge ${u.isAdmin ? 'adm-badge-admin' : 'adm-badge-user'}`}>
+                  {u.isAdmin ? 'Admin' : 'User'}
+                </span>
+              </td>
+              <td>
+                <div className="adm-actions">
+                  <button
+                    className="adm-action-btn adm-action-email"
+                    title="Email küldése"
+                    onClick={() => setEmailTarget(u)}
+                  >
+                    📧
+                  </button>
+                  <button
+                    className="adm-action-btn adm-action-edit"
+                    title="Szerkesztés"
+                    onClick={() => setRenameTarget(u)}
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    className="adm-action-btn adm-action-del"
+                    title="Törlés"
+                    onClick={() => setConfirmDelete({ type: 'user', item: u })}
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </>
+)}
 
       {/* ── Modals ── */}
       {confirmDelete && (
