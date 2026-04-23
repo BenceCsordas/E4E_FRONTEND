@@ -4,9 +4,10 @@ import { useNavigate, useParams } from 'react-router'
 import { myUserContext } from '../context/MyContextProvider'
 import './Event.css'
 import EventMap from './EventMap'
-
+import { useMyUser } from '../context/MyContextProvider';
+import Spinner from './Spinner'
 const Event = () => {
-    const { user, setMsg } = useContext(myUserContext)
+    const { user, setMsg } = useMyUser();
     const [event, setEvent] = useState(null)
     const [loading, setLoading] = useState(true)
     const [currentImgIndex, setCurrentImgIndex] = useState(0)
@@ -83,7 +84,7 @@ const Event = () => {
     const handleDelete = async (ev) => {
         const ok = confirm(`Biztos törlöd? (${ev.title})`);
         if (!ok) return;
-
+        setLoading(true)
         const imagesToDelete = Array.isArray(ev.images) && ev.images.length > 0
             ? ev.images
             : (ev.imageDeleteUrl ? [{ delete_url: ev.imageDeleteUrl }] : []);
@@ -92,9 +93,11 @@ const Event = () => {
         if (res?.ok) {
             navigate("/events")
             setMsg({success: "Sikeres törlés!"})
+            
         } else {
             setMsg({err: "Nem sikerült törölni!"})
         }
+        setLoading(false)
     };
 
     if (loading) return <div className="loading">Betöltés...</div>
@@ -215,7 +218,7 @@ const Event = () => {
                                     >
                                         Szerkesztés
                                     </button>
-                                    <button className="btn btn-delete" onClick={() => handleDelete(event)}>Törlés</button>
+                                    <button className="btn btn-delete" disabled={loading} onClick={() => handleDelete(event)}>{ loading ? <Spinner size="sm" label="Törlés folyamatban"/> : "Törlés"}</button>
                                 </div>
                             )}
                         </div>

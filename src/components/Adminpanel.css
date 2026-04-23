@@ -12,6 +12,7 @@
   --adm-hover:  rgba(255, 255, 255, 0.04);
 }
 
+
 /* ── Root ─────────────────────────────────────────────────── */
 .adm-root {
   width: 100%;
@@ -447,6 +448,7 @@
   height: 16px;
   accent-color: var(--adm-blue);
   cursor: pointer;
+  margin-top: 0px;
 }
 
 .adm-modal-btns {
@@ -617,3 +619,166 @@
     padding: 10px;
   } 
 }
+
+
+.adm-root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: adm-fadein 0.3s ease;
+}
+
+@keyframes adm-fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Nav pills ────────────────────────────────────────────── */
+.adm-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adm-nav-pill {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--adm-border);
+  background: var(--adm-bg);
+  color: var(--adm-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.adm-nav-pill.active {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: var(--adm-blue);
+  color: #93c5fd;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+}
+
+/* ── Stats grid ──────────────────────────────────────────── */
+.adm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.adm-stat-card {
+  background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.15));
+  border: 1px solid var(--adm-border);
+  border-top: 2px solid var(--c, var(--adm-blue));
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.2s;
+}
+
+.adm-stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--c, var(--adm-blue));
+}
+
+.adm-stat-label {
+  font-size: 0.78rem;
+  color: var(--adm-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Recent events */
+.adm-recent-events { grid-column: 1 / -1; }
+.adm-recent-list { list-style: none; padding: 0; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+.adm-recent-list li { display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(255,255,255,0.03); border-radius: 8px; font-size: 0.85rem; }
+.adm-recent-title { color: white; }
+.adm-recent-owner { color: var(--adm-muted); }
+
+/* ── Table ────────────────────────────────────────────────── */
+.adm-table-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid var(--adm-border);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.adm-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+.adm-table th { padding: 12px 16px; text-align: left; font-size: 0.72rem; color: var(--adm-muted); text-transform: uppercase; }
+.adm-tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+.adm-tr:hover { background: var(--adm-hover); }
+.adm-table td { padding: 12px 16px; color: var(--adm-text); }
+
+.adm-thumb { width: 36px; height: 36px; object-fit: cover; border-radius: 8px; border: 1px solid var(--adm-border); }
+.adm-td-title, .adm-td-name { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+.adm-avatar { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; background: var(--adm-bg); flex-shrink: 0; }
+
+/* ── Overlay / Modal ──────────────────────────────────────── */
+.adm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adm-modal {
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 28px;
+  width: 360px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+}
+
+.adm-modal-wide { width: 480px; }
+.adm-modal-title { font-size: 1rem; color: white; margin: 0; }
+.adm-modal-title span { color: #93c5fd; }
+
+.adm-input {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.adm-textarea { height: 120px; resize: none; }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.adm-modal-btns { display: flex; gap: 10px; }
+.adm-btn { flex: 1; padding: 10px 16px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.adm-btn-primary { background: var(--adm-blue); color: white; }
+.adm-btn-danger { background: var(--adm-red); color: white; }
+.adm-btn-ghost { background: rgba(255,255,255,0.08); color: var(--adm-muted); border: 1px solid var(--adm-border); }
+
+/* ── Actions ─────────────────────────────────────────────── */
+.adm-action-btn { width: 32px; height: 32px; border: 1px solid var(--adm-border); border-radius: 8px; background: rgba(255, 255, 255, 0.05); cursor: pointer; color: white; }
+.adm-action-edit:hover { background: rgba(59, 130, 246, 0.2); border-color: var(--adm-blue); }
+.adm-action-del:hover { background: rgba(239, 68, 68, 0.2); border-color: var(--adm-red); }
+
+/* ── Drawer ──────────────────────────────────────────────── */
+.adm-drawer {
+  position: fixed;
+  top: 0; right: 0; height: 100%; width: 360px;
+  background: rgba(10, 10, 20, 0.97);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  padding: 24px;
+  z-index: 10000;
+  animation: adm-slide-in 0.25s ease-out;
+}
+
+@keyframes adm-slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
