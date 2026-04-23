@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import * as React from "react";
-
+import '@testing-library/jest-dom'
 // Komponensek
 import Event from "./components/Event";
 import CreateEvent from "./components/CreateEvent";
@@ -12,7 +12,6 @@ import Profile from "./components/Profile";
 // MOCKOK ÉS SETUP
 // ═══════════════════════════════════════════════════════════════════════════
 
-// JAVÍTOTT ÚTVONAL - Ellenőrizd, hogy a fájl neve pontosan ez-e!
 vi.mock("./context/MyContextProvider", () => ({
   useMyUser: vi.fn(),
   myUserContext: { Provider: ({ children }) => <div>{children}</div> }
@@ -78,9 +77,6 @@ beforeEach(() => {
   });
 });
 
-// ═══════════════════════════════════════════════════════════════════════════
-// TESZTEK (Mind a 28 visszaállítva és javítva)
-// ═══════════════════════════════════════════════════════════════════════════
 
 describe("Event - Megjelenítés és Alapfunkciók", () => {
   test("1. Az esemény címe megjelenik", async () => { render(<Event />); expect(await screen.findByText("Teszt Esemény")).toBeInTheDocument(); });
@@ -142,7 +138,6 @@ describe("CreateEvent - Validáció és Slide-ok", () => {
   
   test("17. Sikeres létrehozás után navigáció", async () => {
     vi.mocked(addEvent).mockResolvedValue({ ok: true });
-    // Itt a komponens logikája hívja a navigációt
     expect(true).toBe(true); 
   });
   test("18. Sikertelen mentéskor hibaüzenet", async () => {

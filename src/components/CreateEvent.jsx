@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router'
 import { myUserContext } from '../context/MyContextProvider';
 import { useMyUser } from '../context/MyContextProvider';
+import Spinner from './Spinner';
 const CreateEvent = () => {
   const { setMsg } = useMyUser();
   const [title, setTitle] = useState("");
@@ -189,7 +190,7 @@ const CreateEvent = () => {
                   type="submit" 
                   disabled={loading} // Letiltja a kattintást, ha loading true
                 >
-                  {loading ? "Létrehozás folyamatban..." : "Esemény létrehozása"}
+                  {loading ?  <Spinner size="sm" label={"Létrehozás folyamatban"}/> : "Esemény létrehozása"}
               </button>
             </div>
           </div>
