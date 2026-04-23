@@ -11,9 +11,9 @@ import {
 } from '../utils'
 import EventCard from './EventCard'
 import AdminPanel from './AdminPanel'
-
+import { useMyUser } from '../context/MyContextProvider';
 const Profile = () => {
-  const { user, logoutUser, deleteAccount, showToast } = useContext(myUserContext)
+  const { user, logoutUser, deleteAccount, showToast  } = useMyUser();
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
 
@@ -64,8 +64,9 @@ const Profile = () => {
     } catch (error) {
       showToast("error", "Váratlan hiba!", "error")
     } finally {
-      setUploading(false)
-      e.target.value = null
+        setUploading(false);
+        // e.target.value = null; 
+        e.target.value = "";   
     }
   }
 

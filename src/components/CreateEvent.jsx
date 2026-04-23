@@ -5,9 +5,9 @@ import './CreateEvent.css';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router'
 import { myUserContext } from '../context/MyContextProvider';
-
+import { useMyUser } from '../context/MyContextProvider';
 const CreateEvent = () => {
-  const { setMsg } = useContext(myUserContext);
+  const { setMsg } = useMyUser();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
@@ -16,7 +16,7 @@ const CreateEvent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   const totalSlides = 3;
 
   // "2026-04-13" → "2026.04.13"
@@ -62,11 +62,15 @@ const CreateEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validációk (maradnak változatlanul)
     if (!title.trim()) { setMsg({ warning: "A cím megadása kötelező!" }); setCurrentIndex(0); return; }
     if (!description.trim()) { setMsg({ warning: "A leírás megadása kötelező!" }); setCurrentIndex(0); return; }
     if (!address.trim()) { setMsg({ warning: "A helyszín megadása kötelező!" }); setCurrentIndex(1); return; }
     if (!date) { setMsg({ warning: "A dátum megadása kötelező!" }); setCurrentIndex(1); return; }
     if (!time) { setMsg({ warning: "Az időpont megadása kötelező!" }); setCurrentIndex(1); return; }
+
+    // Töltés indítása
+    setLoading(true);
 
     const files = images.map((img) => img.file);
 
@@ -83,6 +87,7 @@ const CreateEvent = () => {
 
     if (result?.ok) {
       setMsg({ success: "Sikeresen létrehoztad az eseményed: " + title });
+      // Resetelések...
       setTitle("");
       setDescription("");
       setAddress("");
@@ -94,6 +99,8 @@ const CreateEvent = () => {
       navigate("/profile");
     } else {
       setMsg({ err: "Hiba történt az esemény létrehozásakor" });
+      // Hiba esetén újra engedélyezzük a gombot
+      setLoading(false);
     }
   };
 
@@ -177,8 +184,12 @@ const CreateEvent = () => {
               ) : (
                 <div className="placeholder-preview">Nincs kép kiválasztva</div>
               )}
-              <button className='upload' type="submit">
-                Esemény létrehozása
+              <button 
+                  className='upload' 
+                  type="submit" 
+                  disabled={loading} // Letiltja a kattintást, ha loading true
+                >
+                  {loading ? "Létrehozás folyamatban..." : "Esemény létrehozása"}
               </button>
             </div>
           </div>

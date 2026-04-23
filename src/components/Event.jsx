@@ -4,9 +4,9 @@ import { useNavigate, useParams } from 'react-router'
 import { myUserContext } from '../context/MyContextProvider'
 import './Event.css'
 import EventMap from './EventMap'
-
+import { useMyUser } from '../context/MyContextProvider';
 const Event = () => {
-    const { user, setMsg } = useContext(myUserContext)
+    const { user, setMsg } = useMyUser();
     const [event, setEvent] = useState(null)
     const [loading, setLoading] = useState(true)
     const [currentImgIndex, setCurrentImgIndex] = useState(0)

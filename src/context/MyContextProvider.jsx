@@ -12,7 +12,7 @@ import { useCallback } from 'react'
 // import { EmailAuthProvider } from 'firebase/auth/web-extension'
 // import { updateAvatar } from '../myBackend'
 export const myUserContext = createContext()
-
+export const useMyUser = () => React.useContext(myUserContext);
 export const MyUserProvider = ({children}) => {
   const [msg, setMsg] = useState({})
   const [user, setUser] = useState(null)

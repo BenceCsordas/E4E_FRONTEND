@@ -274,7 +274,6 @@ export const readRegistrationCounts = async () => {
 
 // ---------------------------
 // ADMIN API FÜGGVÉNYEK
-// Másold be a utils.js végére
 // ---------------------------
 
 // Az összes user lekérése (admin only)
@@ -340,6 +339,33 @@ export const adminReadAllEvents = async (limit = 200) => {
   } catch (error) {
     console.log("Admin events read hiba:", error?.response?.data || error.message);
     return { count: 0, events: [] };
+  }
+};
+
+// Esemény törlése adminként (bármelyik eseményt törölheti)
+export const adminDeleteEvent = async (id, images = []) => {
+  try {
+    // 1. Képek törlése a Firebase Storage-ból (ha vannak)
+    // Megjegyzés: Ha a képtörlés hiba, érdemes lehet így is továbbmenni az adatbázis törlésre
+    if (images && images.length > 0) {
+      await deleteImages(images);
+    }
+
+    // 2. Törlés a backend admin végpontján keresztül
+    const res = await backendApi.delete(`/admin/events/${id}`);
+    return res.data; // { ok, msg }
+  } catch (error) {
+    console.log("Admin event delete hiba:", error?.response?.data || error.message);
+    return null;
+  }
+};
+export const adminUpdateEvent = async (id, data) => {
+  try {
+    const res = await backendApi.put(`/admin/events/${id}`, data);
+    return res.data; // { ok, msg }
+  } catch (error) {
+    console.log("Admin event update hiba:", error?.response?.data || error.message);
+    return null;
   }
 };
 
