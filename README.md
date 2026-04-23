@@ -1,4 +1,5 @@
---- Events For Everyone (E4E)---
+                                                                        --- Events For Everyone (E4E)---
+
   Az alkalmazás fő rendeltetése, hogy embereket hozzon össze és közös, új élményeket tegyen számukra elérhetővé. 
   A fejlesztés hátterében az a felismerés áll, hogy a közösségi média térnyerése negatív hatással van a személyes, valós kapcsolatokra, amelyeket ez az alkalmazás hivatott erősíteni.
 Az program funkciói: 
