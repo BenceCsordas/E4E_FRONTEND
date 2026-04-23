@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {  readEvents,  readMe, readRegistrationCounts } from "../utils";
 import EventCard from "./EventCard";
 import { useNavigate } from "react-router";
+import Spinner from "./Spinner";
 
 const Events = () => {
   const [searched, setSearched] = useState("")
@@ -63,17 +64,18 @@ const Events = () => {
         </div>
       </div>
 
-      {loading && <div className="status">Betöltés…</div>}
+      
       {err && <div className="status error">{err}</div>}
 
       <div className="eventsGrid">
+        {loading && <div className="status" style={{justifySelf:"center"}}><Spinner size="lg" /></div>}
         {filteredEvents.length > 0 ? (
           filteredEvents.map((ev) => {
             const isOwner = currentUser && ev.ownerUid === currentUser.id;
             return <EventCard key={ev.id} ev={ev} isOwner={isOwner} setEvents={setEvents} regCount={regCounts[ev.id] ?? 0} />;
           })
         ) : (
-          !loading && <div className="status">Nincs találat.</div>
+          !loading && <div className="status" style={{justifySelf:"center"}}>Nincs találat.</div>
         )}
       </div>
       <button 
