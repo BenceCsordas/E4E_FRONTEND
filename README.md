@@ -1,8 +1,6 @@
-<img width="1919" height="1000" alt="image" src="https://github.com/user-attachments/assets/400cfd68-b5a6-4ba2-b2d7-3e285995fa1c" />--- Events For Everyone (E4E)---
-a) Mi az alkalmazás célja? (5p)
+--- Events For Everyone (E4E)---
   Az alkalmazás fő rendeltetése, hogy embereket hozzon össze és közös, új élményeket tegyen számukra elérhetővé. 
   A fejlesztés hátterében az a felismerés áll, hogy a közösségi média térnyerése negatív hatással van a személyes, valós kapcsolatokra, amelyeket ez az alkalmazás hivatott erősíteni.
-b) Milyen funkciói vannak (menüpontok)? (10p)
 Az program funkciói: 
 - A fő oldalon látható:
       - Bejelentkezés gomb – a felhasználói fiókba való belépéshez
