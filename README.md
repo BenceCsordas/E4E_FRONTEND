@@ -1,4 +1,4 @@
-                                                                        --- Events For Everyone (E4E)---
+                                                          --- Events For Everyone (E4E)---
 
   Az alkalmazás fő rendeltetése, hogy embereket hozzon össze és közös, új élményeket tegyen számukra elérhetővé. 
   A fejlesztés hátterében az a felismerés áll, hogy a közösségi média térnyerése negatív hatással van a személyes, valós kapcsolatokra, amelyeket ez az alkalmazás hivatott erősíteni.
@@ -53,9 +53,9 @@ c) Mennyiben más (reszponzív) a kinézet mobilon? (10p)
     ![Bejelentkezés mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobil_login_wlb7sj.png)
         
     ![Profil mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776931615/mobil_profile_p1dxff.png)
-d) Hogyan tárolja az adatokat? (5p)
-   ![Profil mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776933987/database_s3nvcc.png)
-e) Melyek a fontosabb backend végpontok? (10p)
+    
+    ![Profil mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776933987/database_s3nvcc.png)
+  
    1. POST /users/register — Ez az alapja mindennek, hiszen felhasználó nélkül az alkalmazás többi funkciója nem használható. Létrehozza a Firebase Auth fiókot és a Firestore felhasználói dokumentumot egyszerre.
 
 Paraméterek (body): name, email, password
