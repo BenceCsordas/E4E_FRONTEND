@@ -255,10 +255,13 @@ A tesztek Vitest keretrendszerrel készültek
 
    ### Backend index.js tesztjei
   <ins>A backend tesztjei: </ins> [index.test.js](https://github.com/BenceCsordas/E4E_BACKEND/blob/main/index.test.js)
+  ![A backend tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355134/backend_p6xjej.png)
 
    ### Frontend komponensek tesztjei
   <ins>A frontend tesztjei: </ins> [components.test.js](https://github.com/BenceCsordas/E4E_FRONTEND/blob/main/src/components.test.jsx)
+  ![A komponensek tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355134/komponenstest_un4rx2.png)
 
   ### Utils.js tesztjei
   <ins>A utils.js tesztjei: </ins> [utils.test.js](https://github.com/BenceCsordas/E4E_FRONTEND/blob/main/src/utils.test.js)
+  ![Az util.js tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355135/utilstest_amkzth.png)
   
