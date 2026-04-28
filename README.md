@@ -11,7 +11,8 @@
   - Esemény létrehozása gomb – új esemény szervezésének megkezdéséhez
   - Események gomb – a meglévő események böngészéséhez
   - Kiemelt események szekció – amelyben a legújabb és legnépszerűbb események kerülnek kiemelésre, lapozható kártya formátumban
-  ![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)
+
+    ![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)  
  ### 2.  **Események szervezése(annak későbbi módosítását):**
   - leírás hozzáadása
   - cím megadása
@@ -254,14 +255,14 @@ A tesztek Vitest keretrendszerrel készültek
 
 
    ### Backend index.js tesztjei
-  <ins>A backend tesztjei: </ins> [index.test.js](https://github.com/BenceCsordas/E4E_BACKEND/blob/main/index.test.js)
-  ![A backend tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355134/backend_p6xjej.png)
+  ![A backend tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355134/backend_p6xjej.png)  
+  <ins>A backend tesztjei: </ins> [index.test.js](https://github.com/BenceCsordas/E4E_BACKEND/blob/main/index.test.js)  
 
    ### Frontend komponensek tesztjei
-  <ins>A frontend tesztjei: </ins> [components.test.js](https://github.com/BenceCsordas/E4E_FRONTEND/blob/main/src/components.test.jsx)
-  ![A komponensek tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355134/komponenstest_un4rx2.png)
+  ![A komponensek tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355134/komponenstest_un4rx2.png)  
+  <ins>A frontend tesztjei: </ins> [components.test.js](https://github.com/BenceCsordas/E4E_FRONTEND/blob/main/src/components.test.jsx)  
 
   ### Utils.js tesztjei
-  <ins>A utils.js tesztjei: </ins> [utils.test.js](https://github.com/BenceCsordas/E4E_FRONTEND/blob/main/src/utils.test.js)
-  ![Az util.js tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355135/utilstest_amkzth.png)
+  ![Az util.js tesztjei](https://res.cloudinary.com/denrhq4ia/image/upload/v1777355135/utilstest_amkzth.png)  
+  <ins>A utils.js tesztjei: </ins> [utils.test.js](https://github.com/BenceCsordas/E4E_FRONTEND/blob/main/src/utils.test.js)  
   
