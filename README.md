@@ -11,8 +11,6 @@
   - Esemény létrehozása gomb - új esemény szervezésének megkezdéséhez
   - Események gomb - a meglévő események böngészéséhez
   - Kiemelt események szekció - amelyben a legújabb és legnépszerűbb események kerülnek kiemelésre, lapozható kártya formátumban
-
-    ![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)  
  ### 2.  **Események szervezése(annak későbbi módosítását):**
   - leírás hozzáadása
   - cím megadása
@@ -30,23 +28,31 @@
   - Az események oldalon az összes elérhető esemény böngészhető. A felületen egy keresősáv segítségével szűrhetők az események. Az események kártya formátumban jelennek meg, amelyeken az alábbi információk láthatók: az esemény neve, helyszíne, rövid leírása, a szervező neve, valamint a jelentkezők száma.
 
         
-![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)
 
-## Reszponzív mobilnézet
+## Reszponzív mobil nézet
+
+  ![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)
+  ![Mobil nézet fő oldal](https://res.cloudinary.com/recipes2025/image/upload/v1777371340/fooldalreszp_me14rw.png)
     
-  ![Home mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930698/mobil_home_uws6ha.png)
+  ![Események](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/events_pc_pokfy9.png)
+  ![Események mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/mobil_events_jfr9uf.png)
+  
+  ![Esemény](https://res.cloudinary.com/recipes2025/image/upload/v1777371727/esemeny_gdcrjr.png)
+  ![Esemény mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371139/mobile_details_pasx9c.png)
+
+  
+  ![Esemény szerkesztés]()
+  ![Esemény szerkesztés mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/mobil_edit_fzmgzo.png)
+  
+  
     
     
-  ![Események mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobil_events_kmtymf.png)
+ 
     
     
-  ![Esemény mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobile_details_ezmiq6.png)
+  
     
     
-  ![Esemény helyszín mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobil_map_y0wt4n.png)
-    
-    
-  ![Esemény szerkesztés mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930917/mobil_edit_dxpv8m.png)
     
     
   ![Esemény létrehozás mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobil_create_xveja8.png)
