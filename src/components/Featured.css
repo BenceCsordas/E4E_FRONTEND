@@ -17,11 +17,6 @@
   box-sizing: border-box;
 }
 
-/* =============================
-   App.css GridContainer div override
-   – minden belső elemet nulláz, majd
-     explicit visszaállít
-   ============================= */
 .featured-wrapper,
 .featured-wrapper > *,
 .featured-wrapper * {
@@ -86,8 +81,9 @@
   justify-content: center !important;
   align-items: center !important;
   text-align: center;
-  padding: 8px 20px;
+  padding: 10px 24px;
   overflow: hidden;
+  gap: 4px;
 }
 
 .featured-content--enter {
@@ -110,8 +106,8 @@
    Title
    ============================= */
 .featured-title {
-  margin: 0 0 6px;
-  font-size: clamp(14px, 2vw, 20px);
+  margin: 0 0 4px;
+  font-size: clamp(15px, 2vw, 20px);
   font-weight: 800;
   color: #ffffff;
   line-height: 1.25;
@@ -135,7 +131,7 @@
   gap: 5px;
   font-size: clamp(10px, 1.2vw, 12px);
   color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -146,7 +142,7 @@
    Description
    ============================= */
 .featured-desc {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-size: clamp(10px, 1.1vw, 12px);
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.5;
@@ -157,14 +153,14 @@
 }
 
 /* =============================
-   Footer: owner + button
+   Footer: owner + regcount + button
    ============================= */
 .featured-footer {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 6px;
+  gap: 5px;
   width: 100%;
   flex-shrink: 0;
 }
@@ -178,13 +174,19 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
+.featured-regcount {
+  font-size: clamp(9px, 1vw, 11px);
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.03em;
+}
+
 .featured-btn {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25) !important;
   color: #fff;
   font-size: clamp(10px, 1.1vw, 12px);
   font-weight: 600;
-  padding: 5px 16px;
+  padding: 6px 18px;
   border-radius: 100px;
   cursor: pointer !important;
   pointer-events: auto !important;
@@ -215,8 +217,8 @@
 }
 
 .featured-arrow {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
   background: rgba(255, 255, 255, 0.07);
@@ -340,33 +342,31 @@
 
 /* =============================
    RESZPONZÍV
-   App.css breakpoints-hoz igazítva:
-   1300px / 970px / 450px / 400px
    ============================= */
 
-/* 1300px alatt – kisebb grid cellák (230px) */
+/* 1300px alatt */
 @media (max-width: 1300px) {
   .featured-label {
     padding: 10px 14px 0;
     font-size: 10px;
   }
   .featured-content {
-    padding: 6px 14px;
+    padding: 6px 16px;
   }
   .featured-nav {
     padding: 4px 10px 3px;
   }
+  .featured-desc{
+    display: none;
+  }
 }
 
-/* 970px alatt – grid átrendeződik, div3 teljes szélesség 2 col */
+/* 970px alatt – grid átrendeződik */
 @media (max-width: 970px) {
   .featured-title {
     font-size: 16px;
   }
-  .featured-desc {
-    -webkit-line-clamp: 2;
-    font-size: 11px;
-  }
+  
   .featured-meta {
     font-size: 11px;
   }
@@ -375,60 +375,111 @@
     gap: 6px;
   }
   .featured-arrow {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
   }
 }
 
-/* 450px alatt – kis telefon */
-@media (max-width: 450px) {
+/* =============================
+   Mobil – div3 önálló kártyaként
+   ============================= */
+@media (max-width: 600px) {
+  /* A div3 legyen fix magasságú, ne nyomja szét az oldalt */
+  
+
+  
+
   .featured-label {
-    padding: 7px 10px 0;
+    padding: 10px 12px 0;
     font-size: 9px;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.08em;
   }
+
+  .featured-content {
+    padding: 6px 14px;
+    gap: 3px;
+  }
+
   .featured-title {
-    font-size: 13px;
-    margin-bottom: 3px;
+    font-size: 15px;
+    margin-bottom: 2px;
+    -webkit-line-clamp: 2;
   }
-  /* Leírás elrejtve – nincs hely */
+
+  .featured-meta {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+
+  /* Leírás elrejtve mobilon – nincs hely */
   .featured-desc {
     display: none;
   }
-  .featured-meta {
-    font-size: 10px;
-    margin-bottom: 3px;
+
+  .featured-footer {
+    gap: 4px;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap;
   }
+
   .featured-owner {
     font-size: 10px;
   }
+
+  .featured-regcount {
+    font-size: 10px;
+  }
+
   .featured-btn {
     font-size: 10px;
-    padding: 3px 11px;
+    padding: 4px 13px;
   }
-  .featured-content {
-    padding: 5px 10px;
-    gap: 2px;
-  }
-  .featured-footer {
-    gap: 4px;
-  }
+
   .featured-nav {
-    padding: 3px 8px 2px;
+    padding: 3px 10px 3px;
     gap: 5px;
   }
+
   .featured-arrow {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
+
   .featured-dot {
     width: 5px;
     height: 5px;
   }
   .featured-dot--active {
-    width: 13px;
+    width: 14px;
   }
+
   .featured-progress {
     height: 2px;
+  }
+}
+
+/* 400px – nagyon kis telefon */
+@media (max-width: 400px) {
+ 
+
+  
+
+  .featured-title {
+    font-size: 13px;
+  }
+
+  .featured-footer {
+    gap: 3px;
+  }
+
+  .featured-btn {
+    padding: 3px 10px;
+    font-size: 9px;
+  }
+
+  .featured-arrow {
+    width: 20px;
+    height: 20px;
   }
 }

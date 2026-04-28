@@ -7,7 +7,7 @@ const PwReset = () => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
-        console.log(data.get("email"))
+        
         await resetPassword(data.get("email"))
     }
     return (

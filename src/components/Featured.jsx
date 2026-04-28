@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Featured.css";
-import { readEvents, readMe } from "../utils";
+import { readEvents, readMe, readEventRegistrations } from "../utils";
 import { useNavigate } from "react-router";
 
 const Featured = () => {
@@ -35,9 +35,28 @@ const Featured = () => {
   
       // 1) események
       const eventsData = await readEvents(200);
-      setEvents(eventsData?.events || []);
+      const allEvents = eventsData?.events || [];
+
+      // 2) regisztrációs számok párhuzamos lekérdezése
+      const withCounts = await Promise.all(
+        allEvents.map(async (ev) => {
+          try {
+            const data = await readEventRegistrations(ev.id);
+            return { ...ev, regCount: data?.count ?? 0 };
+          } catch {
+            return { ...ev, regCount: 0 };
+          }
+        })
+      );
+
+      // 3) top 3 legtöbb jelentkezővel
+      const top3 = withCounts
+        .sort((a, b) => b.regCount - a.regCount)
+        .slice(0, 3);
+
+      setEvents(top3);
   
-      // 2) saját user
+      // 4) saját user
       const me = await readMe();
       setCurrentUser(me || null);
   
@@ -45,8 +64,8 @@ const Featured = () => {
     };
   
 
-  // Első 3 elem
-  const data = events.slice(0, 3);
+  // Top 3 már be van szűrve
+  const data = events;
 
   const [current, setCurrent] = useState(0);
   const [phase, setPhase] = useState("idle");
@@ -72,9 +91,7 @@ const Featured = () => {
 
   const openEvent = (ev) => {
       navigate("/event/"+ev.id)
-      console.log("/event/"+ev.id)
-      console.log(ev.id)
-      console.log("asd")
+      
   }
   // Auto-advance
   useEffect(() => {
@@ -155,6 +172,9 @@ const Featured = () => {
               {ev.ownerName}
             </span>
           )}
+          <span className="featured-regcount">
+            ✅ {ev.regCount} jelentkező
+          </span>
           <button
             className="featured-btn"
             onClick={() =>openEvent(ev)}

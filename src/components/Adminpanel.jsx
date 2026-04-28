@@ -330,7 +330,7 @@ const AdminPanel = () => {
                     <td><span className={`adm-badge ${u.isAdmin ? 'adm-badge-admin' : 'adm-badge-user'}`}>{u.isAdmin ? 'Admin' : 'User'}</span></td>
                     <td>
                       <div className="adm-actions">
-                        <button className="adm-action-btn adm-action-email" onClick={() => setEmailTarget(u)}>✉️</button>
+                        
                         <button className="adm-action-btn adm-action-edit" onClick={() => setRenameTarget(u)}>✏️</button>
                         <button className="adm-action-btn adm-action-del" onClick={() => setConfirmDelete({ type: 'user', item: u })}>🗑️</button>
                       </div>
