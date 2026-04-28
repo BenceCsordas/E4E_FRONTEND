@@ -39,10 +39,7 @@ const EventCard = ({ev, isOwner, setEvents, regCount}) => {
         }
     };
 
-    const handleEdit = (ev) => {
-        console.log("Szerkesztés:", ev);
-    };
-
+    
     return (
         <div className="eventCard" key={ev.id} onClick={() => loadEvent(ev)}>
             <div className="eventImageWrap">
@@ -53,11 +50,7 @@ const EventCard = ({ev, isOwner, setEvents, regCount}) => {
                             src={firstImage}
                             alt={ev.title}
                         />
-                        {imageCount > 1 && (
-                            <div className="imageCountBadge">
-                                +{imageCount - 1} kép
-                            </div>
-                        )}
+                        
                     </div>
                 ) : (
                     <div className="eventImagePlaceholder">

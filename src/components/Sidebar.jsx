@@ -28,7 +28,7 @@ const Sidebar = () => {
 
       <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
-          <span className="logo"><img src="logo.png" alt="" /><p>{user?.displayName}</p></span>
+          <span className="logo"><img src={user ? user.photoURL : "/logo.png"} alt="" /><p>{user?.displayName}</p></span>
         </div>
         
         <nav className="sidebar-nav">

@@ -12,7 +12,7 @@ export const SignIn = () => {
       msg && msg?.signIn && navigate('/')
     },[msg])
 
-    console.log(msg);
+    
     
    const handleSubmit= (event)=>{
     event.preventDefault()

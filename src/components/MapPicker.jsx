@@ -33,8 +33,7 @@ const MapPicker = ({ onAddressSelect }) => {
           setAddress(fullAddress);
           onAddressSelect(fullAddress);
 
-          console.log("Mentett cím (térképkattintás):", fullAddress);
-          console.log("Koordináták:", lat, lng);
+          
         } else {
           console.warn("Reverse geocoding sikertelen:", status);
         }
@@ -55,8 +54,7 @@ const MapPicker = ({ onAddressSelect }) => {
       setAddress(fullAddress);
       onAddressSelect(fullAddress);
 
-      console.log("Mentett cím:", fullAddress);
-      console.log("Koordináták:", lat, lng);
+      
     }
   };
 

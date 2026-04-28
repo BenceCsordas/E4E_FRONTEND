@@ -44,7 +44,7 @@ const Profile = () => {
       setProfilePic(meData?.photoURL || null)
       setLoading(false)
     })
-    console.log(user)
+    
   }, [user])
 
   const handleProfilePicChange = async (e) => {
