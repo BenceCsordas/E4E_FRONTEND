@@ -7,10 +7,10 @@
   
 ## Az program funkciói: 
   ### 1.  **A fő oldalon látható:**
-  - Bejelentkezés gomb – a felhasználói fiókba való belépéshez
-  - Esemény létrehozása gomb – új esemény szervezésének megkezdéséhez
-  - Események gomb – a meglévő események böngészéséhez
-  - Kiemelt események szekció – amelyben a legújabb és legnépszerűbb események kerülnek kiemelésre, lapozható kártya formátumban
+  - Bejelentkezés gomb - a felhasználói fiókba való belépéshez
+  - Esemény létrehozása gomb - új esemény szervezésének megkezdéséhez
+  - Események gomb - a meglévő események böngészéséhez
+  - Kiemelt események szekció - amelyben a legújabb és legnépszerűbb események kerülnek kiemelésre, lapozható kártya formátumban
 
     ![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)  
  ### 2.  **Események szervezése(annak későbbi módosítását):**
