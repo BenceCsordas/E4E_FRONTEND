@@ -1,48 +1,59 @@
 # Events For Everyone (E4E)
 
   Az alkalmazás fő rendeltetése, hogy embereket hozzon össze és közös, új élményeket tegyen számukra elérhetővé. 
-  A fejlesztés hátterében az a felismerés áll, hogy a közösségi média térnyerése negatív hatással van a személyes, valós kapcsolatokra, amelyeket ez az alkalmazás hivatott erősíteni.
+  A fejlesztés hátterében az a felismerés áll, hogy a közösségi média térnyerése negatív hatással van a személyes, valós kapcsolatokra, amelyeket ez a weboldal hivatott erősíteni.
 
   <ins>A publikált weboldal linkje:</ins>    [Events4Everyone](https://events4everyone.netlify.app/)
   
 ## Az program funkciói: 
-  ### 1.  **A fő oldalon látható:**
+  ### 1. **A fő oldalon látható:**
   - Bejelentkezés gomb - a felhasználói fiókba való belépéshez
   - Esemény létrehozása gomb - új esemény szervezésének megkezdéséhez
   - Események gomb - a meglévő események böngészéséhez
   - Kiemelt események szekció - amelyben a legújabb és legnépszerűbb események kerülnek kiemelésre, lapozható kártya formátumban
- ### 2.  **Események szervezése(annak későbbi módosítását):**
-  - leírás hozzáadása
-  - cím megadása
-  - képek feltöltése
-  - helyszín meghetározása
-  - esemény időpontjának kijelölése
-### 3. **Eseményekre való jelentkezés:**
-  - Egy esemény megtekintésekor lehetőség nyílik a jelentkezésre, amelyet a szervező is lát.
-### 4. **Saját profil létrehozás:**
-  - Profil létrehozásának lehetősége
+  - Oldal sáv - az oldal mindegyik részén elérhető a könnyebb navigálás megsegítésére
+### 2. **Saját profil létrehozás:**
+  - Profil létrehozásának lehetősége, email cím megerősítéssel
   - Profil törlésének lehetősége
   - Bejelentkezés a profilba
   - Profilkép hozzáadása, szerkesztése és törlése
+ ### 3. **Események szervezése (annak későbbi módosítását):**
+  - Cím megadása
+  - Leírás hozzáadása
+  - Esemény időpontjának kijelölése
+  - Helyszín meghetározása
+  - Képek feltöltése
+### 4. **Eseményekre való jelentkezés:**
+  - Egy esemény megtekintésekor lehetőség nyílik a jelentkezésre, amelyet a szervező is lát.
 ### 5. **Események oldal:**
   - Az események oldalon az összes elérhető esemény böngészhető. A felületen egy keresősáv segítségével szűrhetők az események. Az események kártya formátumban jelennek meg, amelyeken az alábbi információk láthatók: az esemény neve, helyszíne, rövid leírása, a szervező neve, valamint a jelentkezők száma.
+### 6. **Admin felület**
+  - Az admin felület a profil oldalon található és csak az admin jogosultsággal felhatalmazott felhasználók férhetnek hozzá. Lehetőség van az események, profilok áttekintésére, kezelésére valamint törlésére. Lehetőség van keresőmezővel szűrni a profilok és események közt az egyszerűbb átláthatóságért. 
 
         
 
-## Reszponzív mobil nézet
 
+  ## Képek a weboldalról
   ![Fő oldal](https://res.cloudinary.com/denrhq4ia/image/upload/v1776928368/home_efwr7v.webp)
-  ![Mobil nézet fő oldal](https://res.cloudinary.com/recipes2025/image/upload/v1777371340/fooldalreszp_me14rw.png)
-    
   ![Események](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/events_pc_pokfy9.png)
-  ![Események mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/mobil_events_jfr9uf.png)
-  
   ![Esemény](https://res.cloudinary.com/recipes2025/image/upload/v1777371727/esemeny_gdcrjr.png)
+  ![Esemény szerkesztés](https://res.cloudinary.com/recipes2025/image/upload/v1777392708/editFull_ds38ov.png)
+  ![Profil](https://res.cloudinary.com/recipes2025/image/upload/v1777393785/profileFull_jqupdt.png)
+  ![Esemény létrehozás](https://res.cloudinary.com/recipes2025/image/upload/v1777393784/createFull_ttxyiw.png)
+  ![Admin felület](https://res.cloudinary.com/recipes2025/image/upload/v1777394195/adminFull_b6loxa.png)
+  
+  ## Képek a mobil nézetről
+  ![Mobil nézet fő oldal](https://res.cloudinary.com/recipes2025/image/upload/v1777392708/homeRes_shhfgo.png)
+  ![Események mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/mobil_events_jfr9uf.png)
   ![Esemény mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371139/mobile_details_pasx9c.png)
+  ![Esemény szerkesztés mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777392708/editRes_cef8hr.png)
+  ![Profil mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777393784/profileRes_e6x6gx.png)
+  ![Esemény létrehozás mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777393784/createRes_zyzlba.png)
+  ![Admin felület mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777393783/adminRes_gvavlp.png)
+  ![Bejelentkezés mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777393784/loginRes_qajipc.png)
+
 
   
-  ![Esemény szerkesztés]()
-  ![Esemény szerkesztés mobil nézet](https://res.cloudinary.com/recipes2025/image/upload/v1777371136/mobil_edit_fzmgzo.png)
   
   
     
@@ -55,15 +66,7 @@
     
     
     
-  ![Esemény létrehozás mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobil_create_xveja8.png)
-        
-  ![Esemény helyszín megadás mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930337/mobil_create_map_edjmb0.png)
-        
-  ![Esemény kép feltöltés mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930337/mobil_image_s0hwsq.png)
-        
-  ![Bejelentkezés mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776930338/mobil_login_wlb7sj.png)
-        
-  ![Profil mobil nézet](https://res.cloudinary.com/denrhq4ia/image/upload/v1776931615/mobil_profile_p1dxff.png)
+  
 
 ## Ábra az adatbázis kapcsolatokról:
   ![Tábla kapcsolatok](https://res.cloudinary.com/denrhq4ia/image/upload/v1776933987/database_s3nvcc.png)  
